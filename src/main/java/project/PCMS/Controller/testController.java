@@ -12,5 +12,9 @@ public class testController {
     public String index() {
         return "index";
     }
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
     
 }
