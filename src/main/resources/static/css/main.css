@@ -1,0 +1,49 @@
+body{
+    background-color: rgb(255, 255, 255);
+}
+
+.main{
+    background-color: rgb(170, 170, 170);
+    width: 80%;
+    margin: auto;
+    min-height: 1000px;
+}
+
+.menu{
+    background-color: rgb(61, 61, 61);
+    width:100%;
+    border-radius: 1%;
+}
+
+.content{
+    background-color: rgb(61, 61, 61);
+    width: 10%;
+    border-radius: 1%;
+    
+}
+.menubox{
+    color: aliceblue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+
+.menubox:hover{
+    background-color: aliceblue;
+    color: black;
+    cursor:pointer;
+}
+
+.profile{
+    background-color: rgb(80, 80, 80) ;
+    color: rgb(255, 255, 255);
+}
+.profilepic{
+    height: 50px;
+    padding: 30px;
+    border-radius: 50%;
+}
+
+h1{
+    text-align: center;
+}
