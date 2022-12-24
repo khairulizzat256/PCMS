@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--import from thymeleaf to read css in static folder-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="" th:href="@{css/main.css}">
     <title>Index</title>
 </head>
 <body>
@@ -13,12 +14,12 @@
             <div class="profile">
                 <table style="width:100%">
                     <tr>
-                        <td style="width:5%"><img src="../images/profile.png" class="profilepic"></td>
+                        <td style="width:5%"><img src="" th:src="@{/images/profile.png}" alt ="" class="profilepic"></td>
                         <td style="width:30%">PATIENT NAME</td>
-                        <td class="menubox" style ="text-align: center;">BOOK SESSION</td>
-                        <td class="menubox" style="text-align: center;">TAKE PSYCHOLOGY TEST</td>
-                        <td class="menubox" style="text-align: center;">BOOK SESSION</td>
-                        <td class="menubox" href ="login.html" style="text-align: center;">LOGOUT</td>
+                        <td class="menubox" >BOOK SESSION</td>
+                        <td class="menubox" >TAKE PSYCHOLOGY TEST</td>
+                        <td class="menubox" >BOOK SESSION</td>
+                        <td class="menubox" href="" th:href="@{/login}" >LOGOUT</td>
                     </tr>
                 </table>
             </div>
