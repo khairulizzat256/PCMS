@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        textarea {
+        font-size: 18px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 5px;
+        }
+
+        button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        border-radius: 15px;
+        }
+        
+        body{
+            background-color: rgb(255, 255, 255);
+            font-family: sans-serif;
+            text-align: center;
+        }
+        .box1{
+            background-color: rgb(170, 170, 170);
+            padding: 20px 20px 20px 20px;
+            margin: 50px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 1px 1px 1px #ccc;
+        }
+        .box2{
+            background-color: rgb(170, 170, 170);
+            padding: 20px 20px 20px 20px;
+            margin: 50px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 1px 1px 1px #ccc;
+        }
+    </style>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="main.css">
+        <title>Give Feedback Section</title>
+    </head>
+    <body>
+        <div class="main">
+            <h1><b>Feedback Section</b></h1>
+            <div class="box1">
+                <h3>Can you rate in between 1 -5 your last counselling services?</h3>
+                <form>
+                    <label>Rating:</label><br>
+                    <input type="radio" name="rating" value="1"> 1 
+                    <input type="radio" name="rating" value="2"> 2 
+                    <input type="radio" name="rating" value="3"> 3 
+                    <input type="radio" name="rating" value="4"> 4 
+                    <input type="radio" name="rating" value="5"> 5
+                  </form> 
+
+            </div>
+            <div class="box2">
+                <form>
+                    <label for="feedback"><h3>Any comments/feedback for our services?</h3></label><br>
+                    <textarea id="feedback" name="feedback" rows="15" cols="50"></textarea><br>
+                    <button type="submit">Submit</button>
+                  </form> 
+                  
+        </div>
+    </body>
+</html>
