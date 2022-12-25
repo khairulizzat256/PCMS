@@ -27,6 +27,7 @@ body{
     padding-bottom: 10px;
     text-align: center;
     
+    
 }
 
 .menubox:hover{
@@ -45,6 +46,68 @@ body{
     border-radius: 50%;
 }
 
+.sub{
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 6px 20px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.sub:hover{
+    background-color: #29802c;
+}
+.reset{
+    background-color: rgb(251, 87, 87);
+    border: none;
+    color: white;
+    padding: 6px 20px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.reset:hover{
+    background-color: rgb(255, 19, 19);
+}
+
 h1{
     text-align: center;
+}
+
+#test{
+    width: 50%;
+    align-content: center;
+    display: none;
+    margin:auto;
+    font-family: Sans-serif;
+    padding-left: 20px;
+}
+
+#my-btn{
+    
+    background-color: rgb(80, 80, 80); 
+    border: none;
+    color: white;
+    padding: 6px 20px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+
+}
+
+#my-btn:hover{
+    background-color: aliceblue;
+    color: black;
+    cursor:pointer;
 }
