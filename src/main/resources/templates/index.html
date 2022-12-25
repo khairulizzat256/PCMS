@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <!--import from thymeleaf to read css in static folder-->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org"> -->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="" th:href="@{css/main.css}">
-    <title>Index</title>
+    <!-- <link rel="stylesheet" href="" th:href="@{css/main.css}"> -->
+    <link rel="stylesheet" href="../static/css/main.css">
+    <title>PCMS-PATIENT</title>
 </head>
 <body>
     <div class="main">
@@ -14,20 +16,70 @@
             <div class="profile">
                 <table style="width:100%">
                     <tr>
-                        <td style="width:5%"><img src="" th:src="@{/images/profile.png}" alt ="" class="profilepic"></td>
+                        <td style="width:5%"><img src="../images/profile.png" class="profilepic"></td>
                         <td style="width:30%">PATIENT NAME</td>
-                        <td class="menubox" >BOOK SESSION</td>
-                        <td class="menubox" >TAKE PSYCHOLOGY TEST</td>
-                        <td class="menubox" >BOOK SESSION</td>
-                        <td class="menubox" href="" th:href="@{/login}" >LOGOUT</td>
+                        <td><a href="bookCounsellingForm.html"><div class="menubox">BOOK SESSION</div></td>
+                        
+                        <td class="menubox"><button id="my-btn">TAKE PSYCHOLOGY TEST</button></div></td>
+                        
+                        <td><a href="booksharingsessionform.html"><div class="menubox">BOOK SHARING SESSION</div></a></td>
+                        <td><a href="login.html"><div class="menubox">LOGOUT</div></a></td>
                     </tr>
                 </table>
             </div>
         </div>
         
-       
             <h1>WELCOME TO PCMS!</h1>
-      
+
+           
+            <!-- <div id="test">
+                <form>
+                1. I couldn’t seem to experience any positive feeling at all.
+                <input type="radio" name="answer" value="answer">
+                <label for="">Almost always</label><br>
+                <input type="radio" name="answer" value="answer">
+                <label for="css">CSS</label><br>
+                <input type="radio" name="answer" value="answer">
+                <label for="javascript">JavaScript</label>
+                I experienced breathing difficulty.
+                            
+                I found it difficult to work up the initiative to do things.
+
+                I tended to over-react to situations.
+                            
+                I experienced trembling (eg, in the hands).
+                            
+                I felt that I was using a lot of nervous energy.
+                            
+                I was worried about situations in which I might panic and make a fool of myself.
+                            
+                I felt that I had nothing to look forward to.
+                            
+                I found it difficult to relax.
+                            
+                I felt I was close to panic.
+
+                I felt I wasn’t worth much as a person.
+                            
+                I felt scared without any good reason.
+                            
+                I felt that life was meaningless.
+                </form>
+            </div> -->
     </div>
 </body>
 </html>
+
+<script>
+    const btn = document.querySelector("#my-btn");
+    const test = document.querySelector("#test");
+    
+    btn.addEventListener("click", function() {
+        if(test.style.display === "block"){
+        test.style.display = "none";
+        }
+        else{
+            test.style.display = "block" ;
+        }
+        });
+</script>
