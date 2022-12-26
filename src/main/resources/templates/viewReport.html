@@ -33,6 +33,28 @@
         padding: 8px;
         }
 
+        .menubox{
+            color: aliceblue;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+            
+        }
+
+        .menubox:hover{
+            background-color: aliceblue;
+            color: black;
+            cursor:pointer;
+        }
+        .profile{
+            background-color: rgb(80, 80, 80) ;
+            color: rgb(255, 255, 255);
+        }
+        .profilepic{
+            height: 50px;
+            padding: 30px;
+            border-radius: 50%;
+        }
     </style>
     <head>
         <meta charset="UTF-8">
@@ -42,6 +64,19 @@
         <title>Report</title>
     </head>
     <body>
+        <div class="menu">
+            <div class="profile">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:5%"><img src="../images/profile.png" class="profilepic"></td>
+                        <td style="width:30%">DOCTOR NAME</td>
+                        <td><a href="assignCounsellingSession.html"><div class="menubox">VIEW SCHEDULE</div></td>
+                        <td><a href="viewReport.html"><div class="menubox">VIEW REPORT</div></a></td>
+                        <td><a href="login.html"><div class="menubox">LOGOUT</div></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <h1><u>Report Management</u></h1>
         <div class="box3">
             <form>
