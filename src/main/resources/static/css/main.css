@@ -1,5 +1,6 @@
 body{
     background-color: rgb(255, 255, 255);
+    font-family: sans-serif;
 }
 
 .main{
@@ -21,11 +22,16 @@ body{
     border-radius: 1%;
     
 }
+
+a{
+    text-decoration:none;
+}
 .menubox{
     color: aliceblue;
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
+    font-family: sans-serif;
     
     
 }
