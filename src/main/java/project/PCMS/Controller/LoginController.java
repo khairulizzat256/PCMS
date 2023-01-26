@@ -15,7 +15,7 @@ import project.PCMS.Model.user;
 public class LoginController {
    
     //startup auto login page
-    @GetMapping("/login")
+    @GetMapping("/")
     public String login() {
         return "login";
     }

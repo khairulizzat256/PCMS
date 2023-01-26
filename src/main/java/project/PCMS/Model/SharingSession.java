@@ -18,6 +18,7 @@ public class SharingSession {
         this.date = date;
         this.address = address;
         this.detail = detail;
+        
     }
 
     public String getFullname() {
