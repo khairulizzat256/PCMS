@@ -6,12 +6,12 @@ import java.util.Date;
 public class SharingSession {
     private String fullname;
     private String phoneNo;
-    private Time time;
-    private Date date;
+    private String time;
+    private String date;
     private String address;
     private String detail;
     
-    public SharingSession(String fullname, String phoneNo, Time time, Date date, String address, String detail) {
+    public SharingSession(String fullname, String phoneNo, String time, String date, String address, String detail) {
         this.fullname = fullname;
         this.phoneNo = phoneNo;
         this.time = time;
@@ -21,51 +21,56 @@ public class SharingSession {
         
     }
 
-    public String getFullname() {
+    public String getfullname() {
         return fullname;
     }
 
-    public void setFullname(String fullname) {
+    public void setfullname(String fullname) {
         this.fullname = fullname;
     }
 
-    public String getPhoneNo() {
+    public String getphoneNo() {
         return phoneNo;
     }
 
-    public void setPhoneNo(String phoneNo) {
+    public void setphoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
 
-    public Time getTime() {
+    public String gettime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void settime(String time) {
         this.time = time;
     }
 
-    public Date getDate() {
+    public String getdate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setdate(String date) {
         this.date = date;
     }
 
-    public String getAddress() {
+    public String getaddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setaddress(String address) {
         this.address = address;
     }
 
-    public String getDetail() {
+    public String getdetail() {
         return detail;
     }
 
-    public void setDetail(String detail) {
+    public void setdetail(String detail) {
         this.detail = detail;
     }
+    @Override
+    public String toString() {
+        return "SharingSession [fullname=" + fullname + ", phoneNo=" + phoneNo + ", time=" + time + ", date=" + date + ", address=" + address + ", detail=" + detail + "]";
+    }
 }
+

@@ -58,7 +58,7 @@
     <div class="main">
         <div class="inner-box">
         <h2 class="title-form">Booking Sharing Session Form</h2>  
-            <form>
+            <form action="createsharingsession" method="POST">
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 30%">Fullname</td>
@@ -66,15 +66,15 @@
                     </tr>
                     <tr>
                         <td>Phone Number</td>
-                        <td><input type="text" name="phonenum" placeholder="exp:012-3456789" required></td>
+                        <td><input type="text" name="phoneNo" placeholder="exp:012-3456789" required></td>
                     </tr>
                     <tr>
                         <td>Time</td>
-                        <td><input type="time" name="time"  required></td>
+                        <td><input type="text" name="time"  required></td>
                     </tr>
                     <tr>
                         <td>Date</td>
-                        <td><input type="date" name="date"  required></td>
+                        <td><input type="text" name="date"  required></td>
                         
                     </tr>
                     <tr>
@@ -84,7 +84,7 @@
                     </tr>
                     <tr>
                         <td>Reason</td>
-                        <td><input type="text" name="reason" placeholder="Enter your reason" required></td>
+                        <td><input type="text" name="details" placeholder="Enter your reason" required></td>
                     </tr>
                 </table>
                 <br><br>
