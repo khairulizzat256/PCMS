@@ -21,7 +21,7 @@ public class userDao {
 
     public int create(user user) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
-        String sql = "INSERT INTO `user`(username,fullname,phoneNo,password) values(?,?,?,?)";
+        String sql = "INSERT INTO `Patient`(username,fullname,phoneNo,password) values(?,?,?,?)";
         Object args[] = {user.getusername(),user.getfullname(), user.getphoneNo(), user.getpassword() };
         int row = jdbcTemplate.update(sql, args);
         return row;
