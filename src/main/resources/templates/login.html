@@ -75,7 +75,7 @@
         <h2>Please log in your account</h2><br>
         <!--go index page after hit submit button-->
         <!-- <form action="/index" method="post"> -->
-            <form action="index.html" method="post"></form>
+            <form action="index" method="post"></form>
             <div>
                 <h3>username ID</h3>
                 <input type="text" id="username">
@@ -86,9 +86,9 @@
             <a href="index.html">
             <button class="sub" type="submit" value="Submit">Log in </button>
             </a>
-            <a href="register.html">
-            <button class="reg" type="submit" value="Register">Register</button>
-            </a>
+            <form method="get" action="user/register">
+                <button class="reg" type="submit" value="Register">Register</button>
+            </form>
             <br><br>
         </form>
         <br>
