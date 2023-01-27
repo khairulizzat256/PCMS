@@ -81,21 +81,21 @@
         </div>
 
         <h2>Please log in your account</h2><br>
-        <!--go index page after hit submit button-->
-        <!-- <form action="/index" method="post"> -->
-            <form action="index" method="post"></form>
+        <div th:if="${error}" th:text="${error}" class="error"></div>
+       
+            <form action="loginPatientcheck" method="POST">
             <div>
                 <h3>username ID</h3>
-                <input type="text" id="username">
+                <input type="text" name="username">
                 <h3>Password</h3>
-                <input type="password" id="password">
+                <input type="password" name="password">
             </div>
             <br><br>
-            <a href="index.html">
+            
             <button class="sub" type="submit" value="Submit">Log in </button>
-            </a>
+        </form>
                 <a class="reg" href="/register">Register</a>
-            </form>
+            
             <br><br>
         </form>
         <br>

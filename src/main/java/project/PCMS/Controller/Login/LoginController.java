@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import project.PCMS.Model.Admin;
+import project.PCMS.Model.Patient;
 import project.PCMS.Repository.AdminRepository;
 import project.PCMS.Repository.PatientRepository;
 
@@ -18,6 +19,9 @@ public class LoginController {
 
     @Autowired
     AdminRepository adminRepository;
+
+    @Autowired
+    PatientRepository patientRepository;
    
     //startup auto login page
     @GetMapping("/")
@@ -27,11 +31,44 @@ public class LoginController {
 
     @GetMapping("/loginadmin")
     public String loginadmin() {
+        
         return "loginadmin";
+    }
+
+
+    @PostMapping("/loginPatientcheck")
+    public String loginPatientcheck(@RequestParam String username, @RequestParam String password, Model model) {
+       
+        //get username and password in database of Admin table
+        Patient patient = patientRepository.findByUsernameAndPassword(username, password);
+        
+        if (patient == null) {
+            model.addAttribute("error", "Invalid username or password");
+            return "login";
+        }
+        
+        return "index";
+        
     }
 
     @PostMapping("/loginadmincheck")
     public String loginadmincheck(@RequestParam String username, @RequestParam String password, Model model) {
+        System.out.println("==========================================================================================================================================================================");
+       
+        //get username and password in database of Admin table
+        Admin admin = adminRepository.findByUsernameAndPassword(username, password);
+        
+        if (admin == null) {
+            model.addAttribute("error", "Invalid username or password");
+            return "loginadmin";
+        }
+        
+        return "user_client";
+        
+    }
+
+    @PostMapping("/logindoctorcheck")
+    public String logindoctorcheck(@RequestParam String username, @RequestParam String password, Model model) {
         System.out.println("==========================================================================================================================================================================");
        
         //get username and password in database of Admin table
