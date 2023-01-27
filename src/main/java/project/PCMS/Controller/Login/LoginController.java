@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
-import project.DButil.userDao;
-import project.PCMS.Model.user; 
 @Controller
 
 public class LoginController {
