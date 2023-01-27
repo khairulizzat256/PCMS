@@ -30,7 +30,6 @@ public class PatientController {
         patient.setphoneNo(phoneNo);
 
         patientRepository.save(patient);
-        System.out.println(patient.toString());
         
         model.addAttribute("successMessage", "Patient registered successfully!");
         return "login";

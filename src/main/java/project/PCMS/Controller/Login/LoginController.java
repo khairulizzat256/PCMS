@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import project.PCMS.Model.Admin;
+import project.PCMS.Model.Doctor;
 import project.PCMS.Model.Patient;
 import project.PCMS.Repository.AdminRepository;
+import project.PCMS.Repository.DoctorRepository;
 import project.PCMS.Repository.PatientRepository;
 
 @Controller
@@ -22,6 +24,9 @@ public class LoginController {
 
     @Autowired
     PatientRepository patientRepository;
+
+    @Autowired
+    DoctorRepository doctorRepository;
    
     //startup auto login page
     @GetMapping("/")
@@ -39,7 +44,7 @@ public class LoginController {
     @PostMapping("/loginPatientcheck")
     public String loginPatientcheck(@RequestParam String username, @RequestParam String password, Model model) {
        
-        //get username and password in database of Admin table
+        //get username and password in database of Patient table
         Patient patient = patientRepository.findByUsernameAndPassword(username, password);
         
         if (patient == null) {
@@ -68,18 +73,16 @@ public class LoginController {
     }
 
     @PostMapping("/logindoctorcheck")
-    public String logindoctorcheck(@RequestParam String username, @RequestParam String password, Model model) {
-        System.out.println("==========================================================================================================================================================================");
-       
-        //get username and password in database of Admin table
-        Admin admin = adminRepository.findByUsernameAndPassword(username, password);
+    public String logindoctorcheck(@RequestParam String username, @RequestParam String password, Model model) {       
+        //get username and password in database of Doctor table
+        Doctor doctor = doctorRepository.findByUsernameAndPassword(username, password);
         
-        if (admin == null) {
+        if (doctor == null) {
             model.addAttribute("error", "Invalid username or password");
-            return "loginadmin";
+            return "logindoctor";
         }
         
-        return "user_client";
+        return "doctordashboard";
         
     }
         
