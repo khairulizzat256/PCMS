@@ -29,6 +29,18 @@ public class Patient {
     @Column(name = "password")
     private String password;
 
+    
+    public Patient() {
+    }
+
+    public Patient(int id, String username, String fullname, String phoneNo, String password) {
+        this.id = id;
+        this.username = username;
+        this.fullname = fullname;
+        this.phoneNo = phoneNo;
+        this.password = password;
+    }
+
     public Patient(String username, String fullname, String phoneNo, String password) {
         this.username = username;
         this.fullname = fullname;
@@ -81,4 +93,6 @@ public class Patient {
         return "patient [ fullname=" + fullname + ", phoneNo=" + phoneNo + ", password=" + password + "]";
 
     }
+
+    
 }
