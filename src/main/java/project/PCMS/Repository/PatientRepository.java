@@ -6,5 +6,8 @@ import org.springframework.stereotype.Repository;
 import project.PCMS.Model.Patient;
 
 @Repository
-    public interface PatientRepository extends JpaRepository<Patient, Long> {}
+    public interface PatientRepository extends JpaRepository<Patient, Long> {
+
+        Patient findByUsernameAndPassword(String username, String password);
+    }
 

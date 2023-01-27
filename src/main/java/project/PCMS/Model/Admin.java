@@ -26,6 +26,9 @@ public class Admin {
     @Column(name = "fullname")
     private String fullname;
 
+    public Admin() {
+    }
+
     public  Admin (String username, String password, String fullname) {
     this.username = username;
     this.password = password;

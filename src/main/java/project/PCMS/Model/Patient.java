@@ -31,24 +31,9 @@ public class Patient {
     @Column(name = "password")
     private String password;
 
-<<<<<<< HEAD
-    
     public Patient() {
     }
 
-    public Patient(int id, String username, String fullname, String phoneNo, String password) {
-        this.id = id;
-        this.username = username;
-        this.fullname = fullname;
-        this.phoneNo = phoneNo;
-        this.password = password;
-    }
-
-=======
-    public Patient() {
-    }
-
->>>>>>> 621035a3ddf69727038f42594fe8a58c38a31bf3
     public Patient(String username, String fullname, String phoneNo, String password) {
         this.username = username;
         this.fullname = fullname;

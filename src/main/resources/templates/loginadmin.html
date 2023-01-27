@@ -58,6 +58,11 @@
         .reg:hover{
             background-color: rgb(83, 83, 158);
         }
+
+        .error {
+            color: red;
+            font-weight: bold;
+}
     </style>
 <head>
     <meta charset="UTF-8">
@@ -67,27 +72,24 @@
 </head>
 <body class="body-login">
     <div class="box-main">
-        <br><h2>Doctor Login </h2>
+        <br><h2>Administration Login </h2>
         <div class="box-inner">
             <h1>Psychology Centre<br> Management System</h1>
         </div>
-
+        <div th:if="${error}" th:text="${error}" class="error"></div>
         <h2>Please log in your account</h2><br>
         <!--go index page after hit submit button-->
         <!-- <form action="/index" method="post"> -->
-            <form action="index.html" method="post"></form>
+            <form action="loginadmincheck" method="POST">
             <div>
                 <h3>username ID</h3>
-                <input type="text" id="username">
+                <input type="text" name="username">
                 <h3>Password</h3>
-                <input type="password" id="password">
+                <input type="password" name="password">
             </div>
             <br><br>
-            <a href="user_manage.html">
             <button class="sub" type="submit" value="Submit">Log in </button>
-            </a>
-            
-            </a>
+            </form>
             <br><br>
         </form>
         

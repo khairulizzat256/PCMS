@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
     <style>
         .body-login {
                 font-family: arial,helvetica,sans-serif;
@@ -54,14 +54,6 @@
         }
         .reg{
             background-color: rgb(119, 119, 242);
-            border: none;
-            color: white;
-            padding: 16px 32px;
-            text-align: center;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
         }
         .reg:hover{
             background-color: rgb(83, 83, 158);
@@ -75,7 +67,7 @@
 </head>
 <body class="body-login">
     <div class="box-main">
-        <br><h2>Welcome to, </h2>
+        <br><h2>Doctor Login </h2>
         <div class="box-inner">
             <h1>Psychology Centre<br> Management System</h1>
         </div>
@@ -83,7 +75,7 @@
         <h2>Please log in your account</h2><br>
         <!--go index page after hit submit button-->
         <!-- <form action="/index" method="post"> -->
-            <form action="index" method="post"></form>
+            <form action="logindoctor" method="post"></form>
             <div>
                 <h3>username ID</h3>
                 <input type="text" id="username">
@@ -91,22 +83,13 @@
                 <input type="password" id="password">
             </div>
             <br><br>
-            <a href="index.html">
+            <a href="user_manage.html">
             <button class="sub" type="submit" value="Submit">Log in </button>
             </a>
-                <a class="reg" href="/register">Register</a>
-            </form>
+            
+            </a>
             <br><br>
         </form>
-        <br>
-        <a href="/logindoctor">
-            login as doctor.
-        </a>
-    </br>
-        <a href="/loginadmin">
-            login as admin.
-        </a>
-        
         
     </div>
 </body>
