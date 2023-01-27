@@ -1,4 +1,4 @@
-package project.PCMS.Controller;
+package project.PCMS.Controller.Login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,12 +27,7 @@ public class LoginController {
     public String index(){
         return "index";
     }
-    
 
-
-    
-
-        
     }
     
 
