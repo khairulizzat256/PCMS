@@ -11,6 +11,8 @@ import jakarta.persistence.Table;
 @Table  //by default, table name will be as class name
 public class Patient {
 
+   
+
     //id will be auto generate
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +30,9 @@ public class Patient {
 
     @Column(name = "password")
     private String password;
+
+    public Patient() {
+    }
 
     public Patient(String username, String fullname, String phoneNo, String password) {
         this.username = username;

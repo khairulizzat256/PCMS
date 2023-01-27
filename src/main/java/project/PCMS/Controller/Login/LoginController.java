@@ -5,11 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpServletRequest;
-import project.DButil.userDao;
-import project.PCMS.Model.user; 
 @Controller
 
 public class LoginController {
@@ -26,6 +22,11 @@ public class LoginController {
     @PostMapping("/index")
     public String index(){
         return "index";
+    }
+
+    @RequestMapping("/register")
+    public String registerpatient(){
+        return "register";
     }
 
     }
