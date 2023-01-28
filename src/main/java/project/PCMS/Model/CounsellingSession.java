@@ -36,14 +36,21 @@ public class CounsellingSession {
     @Column(name = "status")
     private String status = "unassigned";
 
+    @Column(name = "assignedDoctor")
+    private String assignedDoctor = "NULL";
 
-    public CounsellingSession(String fullname, String phoneNo, Time time, Date date, String reason, String status) {
+
+    
+
+    public CounsellingSession(String fullname, String phoneNo, Time time, Date date, String reason, String status,
+            String assignedDoctor) {
         this.fullname = fullname;
         this.phoneNo = phoneNo;
         this.time = time;
         this.date = date;
         this.reason = reason;
         this.status = status;
+        this.assignedDoctor = assignedDoctor;
     }
 
 
@@ -109,6 +116,16 @@ public class CounsellingSession {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+
+    public String getAssignedDoctor() {
+        return assignedDoctor;
+    }
+
+
+    public void setAssignedDoctor(String assignedDoctor) {
+        this.assignedDoctor = assignedDoctor;
     }
 
     
