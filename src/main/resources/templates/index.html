@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <!--import from thymeleaf to read css in static folder-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org"> -->
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="" th:href="@{css/main.css}"> -->
-    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" th:href="@{css/main.css}"> 
+   
     <title>PCMS-PATIENT</title>
 </head>
 <body>
@@ -17,9 +16,12 @@
                 <table style="width:100%">
                     <tr>
                         <td style="width:5%"><img src="../images/profile.png" class="profilepic"></td>
-                        <td style="width:30%">MUHALIM BIN MUALIM</td>
-                        <td><a href="bookCounsellingForm.html"><div class="menubox">BOOK SESSION</div></td>
-                        
+                        <td style="width:30%"><span th:text="${patient.getfullname.toUpperCase()}"></span></td>
+                        <td>
+                            <a th:href="@{/bookSessionForm/{id}(id=${patient.getId})}">
+                                <div class="menubox">BOOK SESSION</div>
+                            </a>
+                        </td>
                         <td style="align-content: center;"><button id="my-btn">TAKE PSYCHOLOGY TEST</button></td>
                 
                         <td><a href="booksharingsessionform.html"><div class="menubox">BOOK SHARING SESSION</div></a></td>
@@ -29,7 +31,7 @@
             </div>
         </div>
         
-            <h1>WELCOME TO 123 PCMS!</h1>
+        <h1>WELCOME <span th:text="${patient.getfullname.toUpperCase()}"></span>TO PCMS!</h1>
 
            
              <div>
