@@ -34,5 +34,7 @@ public class PatientController {
         model.addAttribute("successMessage", "Patient registered successfully!");
         return "login";
     }
+
+    
     
 }

@@ -11,7 +11,16 @@ import project.PCMS.Model.Patient;
     public interface PatientRepository extends JpaRepository<Patient, Long> {
 
         Patient findByUsernameAndPassword(String username, String password);
-
+       
         List<Patient> findAll();
+        void deletePatientById(int id);
+        Patient getPatientById(int id);
+        
+       
+
+      
+
     }
+
+    
 

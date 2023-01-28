@@ -72,6 +72,7 @@ public class LoginController {
         List<Patient> patients = patientRepository.findAll();
         List<Doctor> doctors = doctorRepository.findAll();
         model.addAttribute("patients", patients);
+        model.addAttribute("doctors",doctors);
         return "admindashboard";
         
     }
@@ -109,7 +110,10 @@ public class LoginController {
     public String registerpatient(){
         return "register";
     }
-
+    @RequestMapping("/createclient")
+    public String createclient(){
+        return "create_client";
+    }
     }
     
 

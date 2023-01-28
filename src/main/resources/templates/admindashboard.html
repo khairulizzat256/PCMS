@@ -15,14 +15,14 @@
                 <div class="profile">
                     <table style="width:100%">
                         <tr>
-                            
+                            <form method="GET">
                             <td style="width:5%"><img src="../images/profile.png" class="profilepic"></td>
-                            <td><a href="#"><div class="menubox" style="width:30%">ADMIN</div></a></td>
-                            <td><a href="/admin/viewclient"><div class="menubox">CLIENTS</div></a></td>
-                            <td><a href="/admin/viewpsychologist"><div class="menubox">PSYCHOLOGISTS</div></a></td>
+                            <td><a href="/admindashboard"><div class="menubox" style="width:30%">ADMIN</div></a></td>
+                            <td><a th:href="@{/admin/viewclient}" ><div class="menubox">CLIENTS</div></a></td>
+                            <td><a th:href="@{/admin/viewpsychologist}"><div class="menubox">PSYCHOLOGISTS</div></a></td>
                           
                             <td><a href="/"><div class="menubox">LOGOUT</div></a></td>
-                            
+                        </form>
                         </tr>
                     </table>
                 </div>
