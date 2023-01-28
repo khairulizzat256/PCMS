@@ -93,6 +93,7 @@ public class LoginController {
             return "logindoctor";
         }
         
+        model.addAttribute("doctor", doctor);
         return "doctordashboard";
         
     }
