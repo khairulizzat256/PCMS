@@ -109,15 +109,15 @@
                                       </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form th:action="@{admin/patient/update}" th:method="post" th:object="${edituser}">
+                                        <form th:action="@{/update}" th:method="post" th:object="${edituser}">
                                             <label>Username:</label>
-                                            <input type="text" th:field="*{username}" th:value="${edituser.getusername}"/>
+                                            <input type="text" th:field="*{username}" th:value="${edituser.getusername}"/><br>
                                             <label>Fullname:</label>
-                                            <input type="text" th:field="*{fullname}" th:value="${edituser.getfullname}"/>
+                                            <input type="text" th:field="*{fullname}" th:value="${edituser.getfullname}"/><br>
                                             <label>Phone Number:</label>
-                                            <input type="text" th:field="*{phoneNo}" th:value="${edituser.getphoneNo}"/>
+                                            <input type="text" th:field="*{phoneNo}" th:value="${edituser.getphoneNo}"/><br>
                                             <label>Password:</label>
-                                            <input type="text" th:field="*{password}" th:value="${edituser.getpassword}"/>
+                                            <input type="text" th:field="*{password}" th:value="${edituser.getpassword}"/><br>
                                           
                                     </div>
                                     <div class="modal-footer">

@@ -47,7 +47,7 @@ public class AdminController {
     public String editPatient(@PathVariable("id") Long id, Model model) {
     Patient patient = patientRepository.findById(id).get();
     List<Patient> patients = patientRepository.findAll();
-    model.addAttribute("patients", patients);
+        model.addAttribute("patients", patients);
     model.addAttribute("edituser",patient);
 
     return "admindashboard";
