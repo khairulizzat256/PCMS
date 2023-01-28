@@ -11,6 +11,8 @@ import jakarta.persistence.Table;
 @Table
 public class Doctor {
     
+    
+
     //id will be auto generate
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +30,9 @@ public class Doctor {
 
     @Column(name = "password")
     private String password;
+
+    public Doctor() {
+    }
 
     public Doctor(String username, String fullname, String phoneNo, String password) {
         this.username = username;

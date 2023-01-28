@@ -13,6 +13,8 @@ public class Patient {
 
    
 
+  
+
     //id will be auto generate
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +36,15 @@ public class Patient {
     public Patient() {
     }
 
+
+    public Patient(int id, String username, String fullname, String phoneNo, String password) {
+        this.id = id;
+        this.username = username;
+        this.fullname = fullname;
+        this.phoneNo = phoneNo;
+        this.password = password;
+    }
+    
     public Patient(String username, String fullname, String phoneNo, String password) {
         this.username = username;
         this.fullname = fullname;

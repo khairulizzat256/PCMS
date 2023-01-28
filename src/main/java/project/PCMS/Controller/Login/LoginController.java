@@ -1,6 +1,10 @@
 package project.PCMS.Controller.Login;
 
+
 import org.hibernate.Session;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import project.PCMS.Model.Admin;
+import project.PCMS.Model.Doctor;
 import project.PCMS.Model.Patient;
 import project.PCMS.Repository.AdminRepository;
+import project.PCMS.Repository.DoctorRepository;
 import project.PCMS.Repository.PatientRepository;
 
 @Controller
@@ -23,6 +29,9 @@ public class LoginController {
 
     @Autowired
     PatientRepository patientRepository;
+
+    @Autowired
+    DoctorRepository doctorRepository;
    
     //startup auto login page
     @GetMapping("/")
@@ -40,7 +49,9 @@ public class LoginController {
     @PostMapping("/loginPatientcheck")
     public String loginPatientcheck(@RequestParam String username, @RequestParam String password, Model model){
        
-        //get username and password in database of patient table
+
+
+        //get username and password in database of Patient table
         Patient patient = patientRepository.findByUsernameAndPassword(username, password);
         
         if (patient == null) {
@@ -55,9 +66,8 @@ public class LoginController {
         
     }
 
-    @PostMapping("/loginadmincheck")
+    @PostMapping("/admindashboard")
     public String loginadmincheck(@RequestParam String username, @RequestParam String password, Model model) {
-        System.out.println("==========================================================================================================================================================================");
        
         //get username and password in database of Admin table
         Admin admin = adminRepository.findByUsernameAndPassword(username, password);
@@ -66,24 +76,25 @@ public class LoginController {
             model.addAttribute("error", "Invalid username or password");
             return "loginadmin";
         }
-        
-        return "user_client";
+
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        return "admindashboard";
         
     }
 
     @PostMapping("/logindoctorcheck")
-    public String logindoctorcheck(@RequestParam String username, @RequestParam String password, Model model) {
-        System.out.println("==========================================================================================================================================================================");
-       
-        //get username and password in database of Admin table
-        Admin admin = adminRepository.findByUsernameAndPassword(username, password);
+    public String logindoctorcheck(@RequestParam String username, @RequestParam String password, Model model) {       
+        //get username and password in database of Doctor table
+        Doctor doctor = doctorRepository.findByUsernameAndPassword(username, password);
         
-        if (admin == null) {
+        if (doctor == null) {
             model.addAttribute("error", "Invalid username or password");
-            return "loginadmin";
+            return "logindoctor";
         }
         
-        return "user_client";
+        return "doctordashboard";
         
     }
         
