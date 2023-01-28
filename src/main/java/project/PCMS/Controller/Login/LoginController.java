@@ -70,7 +70,6 @@ public class LoginController {
         }
 
         List<Patient> patients = patientRepository.findAll();
-        List<Doctor> doctors = doctorRepository.findAll();
         model.addAttribute("patients", patients);
         return "admindashboard";
         
