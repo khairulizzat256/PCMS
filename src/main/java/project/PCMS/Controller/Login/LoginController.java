@@ -1,5 +1,7 @@
 package project.PCMS.Controller.Login;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,9 +58,8 @@ public class LoginController {
         
     }
 
-    @PostMapping("/loginadmincheck")
+    @PostMapping("/admindashboard")
     public String loginadmincheck(@RequestParam String username, @RequestParam String password, Model model) {
-        System.out.println("==========================================================================================================================================================================");
        
         //get username and password in database of Admin table
         Admin admin = adminRepository.findByUsernameAndPassword(username, password);
@@ -67,8 +68,11 @@ public class LoginController {
             model.addAttribute("error", "Invalid username or password");
             return "loginadmin";
         }
-        
-        return "user_client";
+
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        return "admindashboard";
         
     }
 

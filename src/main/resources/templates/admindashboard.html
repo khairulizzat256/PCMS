@@ -1,0 +1,99 @@
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/drdashboard.css}"> 
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <div class="main">
+            <div class="menu">
+                <div class="profile">
+                    <table style="width:100%">
+                        <tr>
+                            
+                            <td style="width:5%"><img src="../images/profile.png" class="profilepic"></td>
+                            <td><a href="#"><div class="menubox" style="width:30%">ADMIN</div></a></td>
+                            <td><a href="/admin/viewclient"><div class="menubox">CLIENTS</div></a></td>
+                            <td><a href="/admin/viewpsychologist"><div class="menubox">PSYCHOLOGISTS</div></a></td>
+                          
+                            <td><a href="/"><div class="menubox">LOGOUT</div></a></td>
+                            
+                        </tr>
+                    </table>
+                </div>
+            </div>
+ 
+            <h1>This is Admin Manage User!</h1>
+            <div class="main">
+                <div th:if="${patients}" class="inner-box">
+                <h2 class="title-form">CLIENT USERS</h2>  
+                    
+                        <table  style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>Username</td>
+                                    <td>Client's name</td>
+                                    <td>Phone Number</td>
+                                    <td>Password</td>                                    
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="patient : ${patients}">
+                            <td th:text="${patient.getId}"></td>
+                            <td th:text="${patient.getusername}"></td>
+                            <td th:text="${patient.getfullname}"></td>
+                            <td th:text="${patient.getphoneNo}"></td> 
+                            <td th:text="${patient.getpassword}"></td>                         
+                            <td><button>Edit</button></td>
+                            </tr>
+                        </tbody>
+                        </table>
+
+                       
+                   
+                    </div>
+
+
+                            <div th:if="${doctors}" class="inner-box">
+                        <h2 class="title-form">PSYCHOLOGIST USERS</h2>  
+                            
+                                <table th:if="${doctors}" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>Username</td>
+                                            <td>Client's name</td>
+                                            <td>Phone Number</td>
+                                            <td>Password</td>                                    
+                                            <td>Action</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="doctor : ${doctors}">
+                                    <td th:text="${doctor.getId}"></td>
+                                    <td th:text="${doctor.getusername}"></td>
+                                    <td th:text="${doctor.getfullname}"></td>
+                                    <td th:text="${doctor.getphoneNo}"></td> 
+                                    <td th:text="${doctor.getpassword}"></td>                         
+                                    <td><button>Edit</button></td>
+                                    </tr>
+                                </tbody>
+                                </table>
+        
+                               
+                           
+                            </div>
+
+                        
+                </div>
+            </div>
+
+</body>
+</html>
