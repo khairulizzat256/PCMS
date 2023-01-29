@@ -37,8 +37,8 @@ public class bookCounsellingSessionController {
     }
 
     @GetMapping("/bookSessionForm/{id}")
-    public String bookCounsellingForm(@PathVariable("id") int id, Model model) {
-        Patient patient = patientRepository.findById(id);
+    public String bookCounsellingForm(@PathVariable("id")Long id, Model model) {
+        Patient patient = patientRepository.findById(id).get();
         model.addAttribute("patient", patient);
         model.addAttribute("counsellingSession", new CounsellingSession());
         return "bookCounsellingForm";
