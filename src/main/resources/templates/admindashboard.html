@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/drdashboard.css}"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
@@ -33,7 +34,7 @@
                 <div th:if="${patients}" class="inner-box">
                 <h2 class="title-form">CLIENT USERS</h2>  
                     
-                        <table  style="width: 100%">
+                        <table class="table" style="width: 100%">
                             <thead>
                                 <tr>
                                     <td>ID</td>
@@ -46,12 +47,16 @@
                             </thead>
                             <tbody>
                             <tr th:each="patient : ${patients}">
-                            <td th:text="${patient.getId}"></td>
-                            <td th:text="${patient.getusername}"></td>
-                            <td th:text="${patient.getfullname}"></td>
-                            <td th:text="${patient.getphoneNo}"></td> 
-                            <td th:text="${patient.getpassword}"></td>                         
-                            <td><button>Edit</button></td>
+                            
+                                <td th:text="${patient.getId}"></td>
+                                <td th:text="${patient.getusername}"></td>
+                                <td th:text="${patient.getfullname}"></td>
+                                <td th:text="${patient.getphoneNo}"></td> 
+                                <td th:text="${patient.getpassword}">                        
+                                <td><a class = "btn btn-warning" th:href="@{admin/patient/edit/{id}(id=${patient.getId})}">Edit</a>
+                                <button class="btn btn-danger" th:attr="data-id=${patient.id}">Delete</button></td>
+                                <td></td>
+                            
                             </tr>
                         </tbody>
                         </table>
@@ -64,7 +69,7 @@
                             <div th:if="${doctors}" class="inner-box">
                         <h2 class="title-form">PSYCHOLOGIST USERS</h2>  
                             
-                                <table th:if="${doctors}" style="width: 100%">
+                                <table class="table" th:if="${doctors}">
                                     <thead>
                                         <tr>
                                             <td>ID</td>
@@ -82,7 +87,8 @@
                                     <td th:text="${doctor.getfullname}"></td>
                                     <td th:text="${doctor.getphoneNo}"></td> 
                                     <td th:text="${doctor.getpassword}"></td>                         
-                                    <td><button>Edit</button></td>
+                                    <td><button class="btn btn-warning" th:attr="data-id=${doctor.id}" th:onclick="'showModal()'">Edit</button>
+                                        <button class="btn btn-danger" th:attr="data-id=${doctor.id}">Delete</button></td>
                                     </tr>
                                 </tbody>
                                 </table>
@@ -91,9 +97,56 @@
                            
                             </div>
 
-                        
+                
+                            <!-- POP UP TO EDIT USER -->
+                            <div th:if="${edituser}">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title">Enter a string</h5>
+                                      <button type="button" class="close" th:onclick="'hideModal()'" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form th:action="@{/update}" th:method="post" th:object="${edituser}">
+                                            <label>Username:</label>
+                                            <input type="text" th:field="*{username}" th:value="${edituser.getusername}"/><br>
+                                            <label>Fullname:</label>
+                                            <input type="text" th:field="*{fullname}" th:value="${edituser.getfullname}"/><br>
+                                            <label>Phone Number:</label>
+                                            <input type="text" th:field="*{phoneNo}" th:value="${edituser.getphoneNo}"/><br>
+                                            <label>Password:</label>
+                                            <input type="text" th:field="*{password}" th:value="${edituser.getpassword}"/><br>
+                                          
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                      <button type="button" class="btn btn-secondary" th:onclick="'hideModal()'">Close</button>
+                                    </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                 </div>
             </div>
 
 </body>
 </html>
+
+<script>
+
+$(".btn btn-warning").click(function() {
+        var patientId = $(this).data("id");
+        $.ajax({
+            url: '/admin/patient/edit',
+            type: 'GET',
+            data: {id: patientId},
+            success: function(data) {
+                // code to populate the form fields with the patient data
+            }
+        });
+    });
+
+
+</script>

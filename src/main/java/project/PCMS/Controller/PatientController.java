@@ -33,8 +33,22 @@ public class PatientController {
         
         model.addAttribute("successMessage", "Patient registered successfully!");
         return "login";
+        
     }
 
+
+    @PostMapping("/update")
+    public String updatePatient(@ModelAttribute Patient patientnew, Model model) {
+
+    model.addAttribute("successMessage", "Patient updated successfully!");
+    Patient patientold = patientRepository.getPatientById(patientnew.getId());
+    patientold.setusername(patientnew.getusername());
+    patientold.setfullname(patientnew.getfullname());
+    patientold.setphoneNo(patientnew.getphoneNo());
+    patientold.setpassword(patientnew.getpassword());
+    patientRepository.save(patientold);
+        
     
-    
+    return "admindashboard";
+    }
 }

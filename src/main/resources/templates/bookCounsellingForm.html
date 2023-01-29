@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <style>
         .inner-box{
             width: 50%;
@@ -51,34 +51,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
     <title>Booking Counselling Form</title>
+    <link rel="stylesheet" th:href="@{css/main.css}"> 
+
 </head>
 <body>
     <div class="main">
+        <div class="menu">
+            <div class="profile">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:5%"><img src="../images/profile.png" class="profilepic"></td>
+                        <td style="width:30%"><span th:text="${patient.getfullname.toUpperCase()}"></span></td>
+                        <td>
+                            <a th:href="@{/bookSessionForm/{id}(id=${patient.getId})}">
+                                <div class="menubox">BOOK SESSION</div>
+                            </a>
+                        </td>
+                        <td style="align-content: center;"><button id="my-btn">TAKE PSYCHOLOGY TEST</button></td>
+                
+                        <td><a href="booksharingsessionform.html"><div class="menubox">BOOK SHARING SESSION</div></a></td>
+                        <td><a href="login.html"><div class="menubox">LOGOUT</div></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    <div class="main">
         <div class="inner-box">
         <h2 class="title-form">Booking Counselling Session Form</h2>  
-            <form>
+            <form th:action="@{/bookSessionForm/submit}" th:object="${counsellingSession}" method="post">
                 <table style="width: 100%">
                     <tr>
                         <td style="width: 30%">Fullname</td>
-                        <td><input type="text" name="fullname" placeholder="Enter your fullname" required></td>
+                        <td><input type="text" th:field="*{fullname}"  /></td></td>
                     </tr>
                     <tr>
                         <td>Phone Number</td>
-                        <td><input type="text" name="phonenum" placeholder="Enter your fullname" required></td>
+                        <td><input type="text" th:field="*{phoneNo}" /></td></td>
                     </tr>
                     <tr>
                         <td>Time</td>
-                        <td><input type="time" name="time" placeholder="Enter your fullname" required></td>
+                        <td><input type="text" th:field="*{time}" placeholder="Time format HH:MM:SS " required>
+                            <script>
+                                document.querySelector("input[name='time']").value = new Date().toTimeString().split(" ")[0];
+                            </script></td>
                     </tr>
                     <tr>
                         <td>Date</td>
-                        <td><input type="date" name="date" placeholder="Enter your fullname" required></td>
+                        <td><input type="date" th:field="*{date}" placeholder="Choose date" required></td>
                     </tr>
                     <tr>
                         <td>Reason</td>
-                        <td><input type="text" name="reason" placeholder="Enter your fullname" required></td>
+                        <td><input type="text" th:field="*{reason}" placeholder="Enter your reason/problem" required></td>
                     </tr>
                 </table>
                 <br><br>

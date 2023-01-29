@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -57,6 +59,7 @@ public class AdminController {
     public String createpsychologist(){
         return "create_psychologist";
     }
+
 
    @PostMapping("/createclient")
    public String createclient(@RequestParam("username")String username
@@ -110,12 +113,21 @@ public class AdminController {
         return new ResponseEntity<String>("Client updated successfully", HttpStatus.OK);
     }
 
-   
-}
-   
-   
 
-    
+    @GetMapping("/patient/edit/{id}")
+    public String editPatient(@PathVariable("id") Long id, Model model) {
+    Patient patient = patientRepository.findById(id).get();
+    List<Patient> patients = patientRepository.findAll();
+        model.addAttribute("patients", patients);
+    model.addAttribute("edituser",patient);
+
+    return "admindashboard";
+}
+}
+
+  
+
+
     
 
 

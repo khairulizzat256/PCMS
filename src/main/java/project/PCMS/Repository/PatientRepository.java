@@ -1,6 +1,9 @@
 package project.PCMS.Repository;
 
+
+import java.util.Optional;
 import java.util.List;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,6 +14,7 @@ import project.PCMS.Model.Patient;
     public interface PatientRepository extends JpaRepository<Patient, Long> {
 
         Patient findByUsernameAndPassword(String username, String password);
+
        
         List<Patient> findAll();
         void deletePatientById(int id);
@@ -22,5 +26,7 @@ import project.PCMS.Model.Patient;
 
     }
 
-    
+
+
+
 

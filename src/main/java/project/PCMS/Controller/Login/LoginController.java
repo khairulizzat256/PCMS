@@ -1,5 +1,8 @@
 package project.PCMS.Controller.Login;
 
+
+import org.hibernate.Session;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +47,10 @@ public class LoginController {
 
 
     @PostMapping("/loginPatientcheck")
-    public String loginPatientcheck(@RequestParam String username, @RequestParam String password, Model model) {
+    public String loginPatientcheck(@RequestParam String username, @RequestParam String password, Model model){
        
+
+
         //get username and password in database of Patient table
         Patient patient = patientRepository.findByUsernameAndPassword(username, password);
         
@@ -53,8 +58,11 @@ public class LoginController {
             model.addAttribute("error", "Invalid username or password");
             return "login";
         }
-        
-        return "index";
+        else{
+            model.addAttribute("patient", patient);
+            System.out.print("-------------------" + patient);
+            return "index";
+        }
         
     }
 
@@ -70,7 +78,6 @@ public class LoginController {
         }
 
         List<Patient> patients = patientRepository.findAll();
-        List<Doctor> doctors = doctorRepository.findAll();
         model.addAttribute("patients", patients);
         model.addAttribute("doctors",doctors);
         return "admindashboard";
@@ -87,6 +94,7 @@ public class LoginController {
             return "logindoctor";
         }
         
+        model.addAttribute("doctor", doctor);
         return "doctordashboard";
         
     }
