@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import project.PCMS.Model.Admin;
+import project.PCMS.Model.CounsellingSession;
 import project.PCMS.Model.Doctor;
 import project.PCMS.Model.Patient;
 import project.PCMS.Repository.AdminRepository;
+import project.PCMS.Repository.BookCounsellingSessionRepository;
 import project.PCMS.Repository.DoctorRepository;
 import project.PCMS.Repository.PatientRepository;
 
@@ -32,6 +34,9 @@ public class LoginController {
 
     @Autowired
     DoctorRepository doctorRepository;
+
+    @Autowired
+    BookCounsellingSessionRepository bookCounsellingSessionRepository;
    
     //startup auto login page
     @GetMapping("/")
@@ -95,6 +100,8 @@ public class LoginController {
             return "logindoctor";
         }
         
+        List<CounsellingSession> counsellingSessions = bookCounsellingSessionRepository.findAllByAssignedDoctor("");
+        model.addAttribute("counsellingSessions", counsellingSessions);
         model.addAttribute("doctor", doctor);
         return "doctordashboard";
         

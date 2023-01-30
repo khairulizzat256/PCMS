@@ -13,8 +13,8 @@
 </head>
 <body>
 
-    <ul class="nav nav-pills">
-        <li role="presentation" class="active"><a href="">Doctor Name</a></li>
+    <ul class="nav nav-pills bg-info">
+        <li role="presentation" class="active"><a href="#" th:text="${doctor.getfullname}"></a></li>
         <li role="presentation"><a href="doctorschedule.html">View Schedule</a></li>
         <li role="presentation"><a href="viewReport.html">View Report</a></li>
         <li role="presentation"><a href="/">Log Out</a></li>
@@ -35,21 +35,31 @@
                             <table class="table table-condensed" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <td>No.</td>
-                                        <td>Fullname</td>
-                                        <td>Phone Number</td>
+                                        <td>Client Fullname</td>
+                                        <td>Client Phone Number</td>
                                         <td>Date</td>
                                         <td>Time</td>
+                                        <td>Reason</td>
                                         <td>Action</td>
                                     </tr>
                                 </thead>
-                                
-                                <td>1</td>
-                                <td>Muhalim bin Mualim</td>
-                                <td>013337232</td>
-                                <td>05/01/2023</td>
-                                <td>9.00 am</td>
-                                <td><button type="submit" class="btn btn-primary">Accept</button></td>
+                                <tbody>
+                                    
+                                    <tr th:each="counsellingSession: ${counsellingSessions}">
+                                        <td th:text="${counsellingSession.fullname}"></td>
+                                        <td th:text="${counsellingSession.phoneNo}"></td>
+                                        <td th:text="${counsellingSession.date}"></td>
+                                        <td th:text="${counsellingSession.time}"></td>
+                                        <td th:text="${counsellingSession.reason}"></td>
+                                        <td>
+                                            <form action="/doctor/acceptsession" th:method="post"></form>
+                                            <input type="hidden" th:name="counsellingsessionId" th:value="${counsellingSession.id}">
+                                            <input type="hidden" th:name="doctorid" th:value="${doctor.getId}">
+                                            <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to submit?')">Accept</button>
+                                        </td>
+                                    </form>
+                                    </tr>
+                                </tbody>
                             </table>
                            
                         </form>
