@@ -35,21 +35,24 @@
                             <table class="table table-condensed" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <td>No.</td>
                                         <td>Fullname</td>
                                         <td>Phone Number</td>
                                         <td>Date</td>
                                         <td>Time</td>
+                                        <td>Reason</td>
                                         <td>Action</td>
                                     </tr>
                                 </thead>
-                                
-                                <td>1</td>
-                                <td>Muhalim bin Mualim</td>
-                                <td>013337232</td>
-                                <td>05/01/2023</td>
-                                <td>9.00 am</td>
-                                <td><button type="submit" class="btn btn-primary">Accept</button></td>
+                                <tbody>
+                                    <tr th:each="counsellingSession: ${counsellingSessions}">
+                                        <td th:text="${counsellingSession.fullname}"></td>
+                                        <td th:text="${counsellingSession.phoneNo}"></td>
+                                        <td th:text="${counsellingSession.date}"></td>
+                                        <td th:text="${counsellingSession.time}"></td>
+                                        <td th:text="${counsellingSession.reason}"></td>
+                                        <td><button type="submit" class="btn btn-primary">Accept</button></td>
+                                    </tr>
+                                </tbody>
                             </table>
                            
                         </form>
