@@ -31,8 +31,7 @@ public class DoctorController {
         
         CounsellingSession CS = counsellingrepo.getReferenceById(counsellingsessionId);
         Doctor doctor = doctorrepository.getReferenceById(doctorid);
-        System.out.println(CS.getFullname());
-        System.out.println(doctor.getfullname());
+       
         CS.setAssignedDoctor(doctor.getfullname());
         CS.setStatus("assigned");
         counsellingrepo.save(CS);
@@ -44,9 +43,21 @@ public class DoctorController {
 
         return "doctordashboard";
     }
+
+    @GetMapping("/doctor/viewschedule")
+    public String viewschedule(@ModelAttribute("doctorId") Long doctorid, Model model) {       
+       
+        Doctor doctor = doctorrepository.getReferenceById(doctorid);
+        List<CounsellingSession> counsellingSessions = counsellingrepo.findByAssignedDoctorAndStatus(doctor.getfullname(),"assigned");
+        model.addAttribute("counsellingSessions", counsellingSessions);
+        model.addAttribute("doctor", doctor);
+        return "schedule";
+        
+    }
+
+
     @GetMapping("/report")
     public String report(){
-        
         return "viewReport";
     }
 }

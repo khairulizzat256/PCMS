@@ -13,6 +13,7 @@ public interface BookCounsellingSessionRepository extends JpaRepository<Counsell
     java.util.List<CounsellingSession> findAllByAssignedDoctor(String string);
    
     CounsellingSession getCounsellingSessionById(int id);
+    java.util.List<CounsellingSession> findByAssignedDoctorAndStatus(String assignedDoctor, String status);
     void deleteCounsellingSessionById(int id);
 
     
