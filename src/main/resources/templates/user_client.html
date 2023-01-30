@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+    <style>
+        
         body{
     font-family: sans-serif;
 }
@@ -46,6 +50,25 @@ button{
     cursor: pointer;
     border-radius: 5px;
 }
+.btn1 {
+  background-color:blue;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  
+}
+
+.btn2{
+  background-color:green;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  
+}
+
+
 .sub:hover{
     background-color: #29802c;
 }
@@ -165,7 +188,9 @@ h1{
     margin: 20px 0;
   }
   /* ###  Table wrap */
-  
+  .st_wrap_table{
+    
+  }
   /* ##   header */
   .st_table_header{
     position: -webkit-sticky;
@@ -183,7 +208,9 @@ h1{
   .st_table_header .st_row{
     color: rgba(220,220,220, .7);
   }
-  
+  .st_table_header .st_column{
+    
+  }
   /* ##  table */
   .st_table{
     display: -webkit-box;
@@ -225,9 +252,9 @@ h1{
                         <tr>
                             
                             <td style="width:5%"><img src="../images/profile.png" class="profilepic"></td>
-                            <td><a href="/admindashboard"><div class="menubox" style="width:30%">ADMIN</div></a></td>
-                            <td><a th:href="@{/admin/viewclient}" ><div class="menubox">CLIENTS</div></a></td>
-                            <td><a th:href="@{/admin/viewpsychologist}"><div class="menubox">PSYCHOLOGISTS</div></a></td>
+                            <td><a href="admindashboard"><div class="menubox" style="width:30%">ADMIN</div></a></td>
+                            <td><a href="/admin/viewclient"><div class="menubox">CLIENTS</div></a></td>
+                            <td><a href="/admin/viewpsychologist"><div class="menubox">PSYCHOLOGISTS</div></a></td>
                           
                             <td><a href="/"><div class="menubox">LOGOUT</div></a></td>
                             
@@ -235,48 +262,54 @@ h1{
                     </table>
                 </div>
             </div>
-        </body>
+            </body>
+ 
+            <h1>Client User!</h1>
 
-                    <h1>This is Psychologist User!</h1>
-                    <div class="main">
-                        <div th:if="${doctors}" class="inner-box">
-                        <h2 class="title-form">PSYCHOLOGIST USERS</h2>  
+            <div class="main">
+                <div th:if="${patients}" class="inner-box">
+                <h2 class="title-form">CLIENT USERS</h2> 
+                
+                <div class = "col-lg-3">
+                  <div class = "row">
+                   <form method="get" action="/admin/form">
+                  <button class = "button btn1"> Add Patient</button>
+                </form> 
+                  
+                   
+                </div> 
+              </div> 
+                
+                        <table  style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>Username</td>
+                                    <td>Client's name</td>
+                                    <td>Phone Number</td>
+                                    <td>Password</td>                                    
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="patient : ${patients}">
+                            <td th:text="${patient.getId}"></td>
+                            <td th:text="${patient.getusername}"></td>
+                            <td th:text="${patient.getfullname}"></td>
+                            <td th:text="${patient.getphoneNo}"></td> 
+                            <td th:text="${patient.getpassword}"></td>  
+
+                            <td>
                             
-                        <div class = "col-lg-3">
-                          <div class = "row">
-                           <form method="get" action="/admin/form1">
-                          <button class = "button btn1"> Add Psychologist</button>
-                        </form>
-
-                                <table th:if="${doctors}" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <td>ID</td>
-                                            <td>Username</td>
-                                            <td>Client's name</td>
-                                            <td>Phone Number</td>
-                                            <td>Password</td>                                    
-                                            <td>Action</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="doctor : ${doctors}">
-                                    <td th:text="${doctor.getId}"></td>
-                                    <td th:text="${doctor.getusername}"></td>
-                                    <td th:text="${doctor.getfullname}"></td>
-                                    <td th:text="${doctor.getphoneNo}"></td> 
-                                    <td th:text="${doctor.getpassword}"></td>                         
-                                    <td>
-                                      
-                                    <form method="get" th:action="@{/admin/delete1/} + ${doctor.id}">
-                                      <button class = "button btn2">delete</button>
-                                    </form>
-
-                                    </tr>
-                                </tbody>
-                                </table>
-
-                    </div>
+                              <form method="GET" th:action="@{/admin/delete/} + ${patient.id}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class = "button btn2">delete</button>
+                                </form>
+                              </form>
+                            </tr>
+                        </tbody>
+                        </table>                       
+                </div>
             </div>
 
 </body>

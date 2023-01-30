@@ -3,14 +3,43 @@ package project.PCMS.Model;
 import java.sql.Time;
 import java.util.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import jakarta.persistence.Entity;
+
+@Entity
+@Table
 public class SharingSession {
-    private String fullname;
-    private String phoneNo;
-    private String time;
-    private String date;
-    private String address;
-    private String detail;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     
+    @Column(name = "fullname")
+    private String fullname;
+
+    @Column(name = "phoneNo")
+    private String phoneNo;
+
+    @Column(name = "time")
+    private String time;
+
+    @Column(name = "date")
+    private String date;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "detail")
+    private String detail;
+
+    public SharingSession() {
+    }
     public SharingSession(String fullname, String phoneNo, String time, String date, String address, String detail) {
         this.fullname = fullname;
         this.phoneNo = phoneNo;
@@ -18,7 +47,8 @@ public class SharingSession {
         this.date = date;
         this.address = address;
         this.detail = detail;
-        
+
+
     }
 
     public String getfullname() {
