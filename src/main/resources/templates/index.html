@@ -22,9 +22,11 @@
                             </a>
                         </td>
                         <td style="align-content: center;"><button id="my-btn">TAKE PSYCHOLOGY TEST</button></td>
-                
-                        <td><a href="booksharingsessionform.html"><div class="menubox">BOOK SHARING SESSION</div></a></td>
-                        <td><a href="/"><div class="menubox">LOGOUT</div></a></td>
+                        
+                        <td>
+                            <a th:href="@{/sharingsession/{id}(id=${patient.getId})}"><div class="menubox">BOOK SHARING SESSION</div></a></td>
+                        
+                            <td><a href="/"><div class="menubox">LOGOUT</div></a></td>
                     </tr>
                 </table>
             </div>
