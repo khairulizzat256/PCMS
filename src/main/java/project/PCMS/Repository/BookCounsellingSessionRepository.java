@@ -11,7 +11,12 @@ import project.PCMS.Model.CounsellingSession;
 public interface BookCounsellingSessionRepository extends JpaRepository<CounsellingSession, Long>{
 
     java.util.List<CounsellingSession> findAllByAssignedDoctor(String string);
-    
+   
+    CounsellingSession getCounsellingSessionById(int id);
+    void deleteCounsellingSessionById(int id);
 
     
 }
+
+
+
