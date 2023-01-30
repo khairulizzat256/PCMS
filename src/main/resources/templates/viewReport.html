@@ -90,10 +90,19 @@
 
                         </tr>
                     </thead>
-                    <td>05/01/2023</td>
-                    <td>Muhalim bin Mualim</td>
-                    <td>Still in phase 2 of depression</td>
-                    <td><button>View</button><button>Edit</button></td>
+
+                    <tr th:each="counsellingSession: ${counsellingSession}">
+                        <td th:text="${counsellingSession.date}"></td>
+                        <td th:text="${counsellingSession.fullname}"></td>
+                        <td th:text="${counsellingSession.counsellingResult}"></td>
+                        <td>
+                             <form method="GET" th:action="@{/admin/delete/} + ${patient.id}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class = "button btn2">delete</button>
+                                </form>
+                        </td>
+                    </tr>
+                    
 
                 </table>
             </form>

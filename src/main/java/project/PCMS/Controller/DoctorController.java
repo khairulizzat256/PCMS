@@ -44,5 +44,9 @@ public class DoctorController {
 
         return "doctordashboard";
     }
-    
+    @GetMapping("/report")
+    public String report(){
+        
+        return "viewReport";
+    }
 }
