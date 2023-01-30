@@ -46,8 +46,7 @@ public class LoginController {
 
     @GetMapping("/loginadmin")
     public String loginadmin() {
-        
-        return "loginadmin";
+         return "loginadmin";
     }
 
 
@@ -90,7 +89,7 @@ public class LoginController {
         
     }
 
-    @PostMapping("/logindoctorcheck")
+    @PostMapping("/doctordashboard")
     public String logindoctorcheck(@RequestParam String username, @RequestParam String password, Model model) {       
         //get username and password in database of Doctor table
         Doctor doctor = doctorRepository.findByUsernameAndPassword(username, password);
