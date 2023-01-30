@@ -13,12 +13,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import project.PCMS.Model.CounsellingSession;
 import project.PCMS.Model.Doctor;
 import project.PCMS.Repository.BookCounsellingSessionRepository;
+import project.PCMS.Repository.DoctorRepository;
 
 @Controller
 public class DoctorController {
 
     @Autowired
     private BookCounsellingSessionRepository counsellingrepo;
+
+    @Autowired
+    BookCounsellingSessionRepository bookCounsellingSessionRepository;
+
+    @Autowired
+    DoctorRepository doctorRepository;
+
+    
 
     @PostMapping("/doctor/acceptsession")
     public String assigncounselling(@RequestParam("counsellingsessionId")Long counsellingsessionId,
@@ -38,8 +47,12 @@ public class DoctorController {
         return "doctordashboard";
     }
     @GetMapping("/report")
-    public String report(){
-        
+    public String report(Model model){
+       
+        List<CounsellingSession> counsellingSessions = bookCounsellingSessionRepository.findAllByAssignedDoctor("");
+        model.addAttribute("counsellingSessions", counsellingSessions);
+       
+
         return "viewReport";
     }
 }
