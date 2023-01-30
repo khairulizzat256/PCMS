@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import project.PCMS.Model.CounsellingSession;
 import project.PCMS.Model.Doctor;
 import project.PCMS.Repository.BookCounsellingSessionRepository;
+import project.PCMS.Repository.DoctorRepository;
 
 @Controller
 public class DoctorController {
@@ -20,14 +21,20 @@ public class DoctorController {
     @Autowired
     private BookCounsellingSessionRepository counsellingrepo;
 
+    @Autowired
+    private DoctorRepository doctorrepository;
+
     @PostMapping("/doctor/acceptsession")
     public String assigncounselling(@RequestParam("counsellingsessionId")Long counsellingsessionId,
-                                    @ModelAttribute("counsellingsession") Doctor doctor, Model model){
+                                    @ModelAttribute("doctor") Long doctorid, Model model){
 
         
         CounsellingSession CS = counsellingrepo.getReferenceById(counsellingsessionId);
-        String drname = doctor.getfullname();
-        CS.setAssignedDoctor(drname);
+        Doctor doctor = doctorrepository.getReferenceById(doctorid);
+        System.out.println(CS.getFullname());
+        System.out.println(doctor.getfullname());
+        CS.setAssignedDoctor(doctor.getfullname());
+        CS.setStatus("assigned");
         counsellingrepo.save(CS);
        
         List<CounsellingSession> counsellingSessions = counsellingrepo.findAllByAssignedDoctor("");

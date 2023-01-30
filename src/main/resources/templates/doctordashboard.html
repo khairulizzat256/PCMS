@@ -53,9 +53,9 @@
                                         <td th:text="${counsellingSession.reason}"></td>
                                         <td>
                                             
-                                            <form action="#" th:action="@{/doctor/acceptsession}" th:object="${counsellingSession}" method="post">
+                                            <form action="#" th:action="@{/doctor/acceptsession}"  method="post">
                                                 <input type="hidden" name="counsellingsessionId" th:value="${counsellingSession.id}">
-                                                <input type="hidden" name="doctor" th:value="${doctor}">
+                                                <input type="hidden" name="doctor" th:value="${doctor.getId}">
                                             <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to submit?')">Accept</button>
                                             </form>
                                         </td>
