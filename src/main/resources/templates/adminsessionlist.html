@@ -1,0 +1,105 @@
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+           <li class="nav-item">
+                <a class="nav-link"href="/admin/admindashboard">ADMIN</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"href="/admin/admindashboard">SESSION</a>
+            </li>
+            <li class="nav-item float-end">
+                <a class="nav-link" href="/">LOGOUT</a>
+            </li>
+            
+          </ul>
+        </div>
+      </nav>
+
+    <body>
+ 
+            <h1>This is Admin Manage User!</h1>
+            <div class="container">
+                <div th:if="${sessions}" class="inner-box">
+                <h2 class="title-form">APPOINTMENT COUNSELLING LIST</h2>  
+                <div class = "row">
+                        <table class="table" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>Date</td>
+                                    <td>Fullname</td>
+                                    <td>Phone Number</td>
+                                    <td>Reason </td>                                    
+                                    <td>Status</td>
+                                    <td>Time</td>
+                                    <td>Assigned Doctor</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="sesi : ${sessions}">
+                            
+                                <td th:text="${sesi.getId}"></td>
+                                <td th:text="${sesi.getDate}"></td>
+                                <td th:text="${sesi.getFullname}"></td>
+                                <td th:text="${sesi.getPhoneNo}"></td> 
+                                <td th:text="${sesi.getReason}">  </td> 
+                                <td th:text="${sesi.getStatus}">  </td>  
+                                <td th:text="${sesi.getTime}">  </td> 
+                                <td th:text="${sesi.getAssignedDoctor}">  </td> 
+                                                          
+                                <td><a class = "btn btn-warning" href="#">Edit</a>
+                                    <form method="GET">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class = "btn btn-danger">delete</button>
+                                        </form>
+                                </td>
+                            
+                            </tr>
+                        </tbody>
+                        </table>
+                      </div>
+                      </div>
+
+
+                             
+                </div>
+            </div>
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+$(".btn btn-warning").click(function() {
+        var patientId = $(this).data("id");
+        $.ajax({
+            url: '/admin/patient/edit',
+            type: 'GET',
+            data: {id: patientId},
+            success: function(data) {
+                // code to populate the form fields with the patient data
+            }
+        });
+    });
+
+    $(document).ready(function () {
+    $('#myModal').modal('show');
+});
+
+
+</script>

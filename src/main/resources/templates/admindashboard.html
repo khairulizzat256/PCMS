@@ -15,7 +15,10 @@
         <div class="container-fluid">
           <ul class="navbar-nav">
            <li class="nav-item">
-                <a class="nav-link"href="/admindashboard">ADMIN</a>
+                <a class="nav-link"href="/admin/admindashboard">ADMIN</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"href="/admin/sessionlist">SESSION</a>
             </li>
             <li class="nav-item float-end">
                 <a class="nav-link" href="/">LOGOUT</a>
@@ -114,9 +117,6 @@
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <h5 class="modal-title">Edit User</h5>
-                                      <button type="button" class="close" th:onclick="'hideModal()'" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
                                     </div>
                                     <div class="modal-body">
                                         <form th:action="@{/update}" th:method="post" th:object="${edituser}">

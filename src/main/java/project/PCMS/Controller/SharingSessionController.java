@@ -68,6 +68,7 @@ public class SharingSessionController {
         sharingSession.setaddress(address);
         sharingSession.setdetail(details);
         SharingSessionRepository.save(sharingSession);
+        model.addAttribute("success", "success");
         return "index";
         
 

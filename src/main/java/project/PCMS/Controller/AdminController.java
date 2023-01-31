@@ -3,25 +3,20 @@ package project.PCMS.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ch.qos.logback.core.net.server.Client;
 import jakarta.transaction.Transactional;
+import project.PCMS.Model.CounsellingSession;
 import project.PCMS.Model.Doctor;
 import project.PCMS.Model.Patient;
+import project.PCMS.Repository.BookCounsellingSessionRepository;
 import project.PCMS.Repository.DoctorRepository;
 import project.PCMS.Repository.PatientRepository;
 
@@ -34,6 +29,9 @@ public class AdminController {
 
     @Autowired
     DoctorRepository doctorRepository;
+
+    @Autowired
+    BookCounsellingSessionRepository bookCounsellingSessionRepository;
 
     @GetMapping("/admindashboard")
     public String dashboard(Model model){
@@ -149,6 +147,15 @@ public class AdminController {
 
     return "admindashboard";
 }
+
+    @GetMapping("sessionlist")
+    public String sessionlist(Model model){
+        List<CounsellingSession> sessions = bookCounsellingSessionRepository.findAll();
+        model.addAttribute("sessions", sessions);
+
+        return "adminsessionlist";
+    }
+
 }
 
   

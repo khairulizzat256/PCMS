@@ -58,26 +58,28 @@
     
 </head>
 <body>
-    <div class="main">
-        <div class="menu">
-            <div class="profile">
-                <table style="width:100%">
-                    <tr>
-                        <td style="width:5%"><img src="../images/profile.png" class="profilepic"></td>
-                        <td style="width:30%"><span th:text="${patient.getfullname.toUpperCase()}"></span></td>
-                        <td>
-                            <a th:href="@{/bookSessionForm/{id}(id=${patient.getId})}">
-                                <div class="menubox">BOOK SESSION</div>
-                            </a>
-                        </td>
-                        <td style="align-content: center;"><button id="my-btn">TAKE PSYCHOLOGY TEST</button></td>
-                
-                        <td><a href="booksharingsessionform.html"><div class="menubox">BOOK SHARING SESSION</div></a></td>
-                        <td><a href="login.html"><div class="menubox">LOGOUT</div></a></td>
-                    </tr>
-                </table>
+
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active " href="#" th:text="${patient.getfullname.toUpperCase}"></a>
+            </li>
+           <li class="nav-item">
+            <a class="nav-link" th:href="@{/bookSessionForm/{id}(id=${patient.getId})}">BOOK APPOINTMENT</a>
+            </li>
+            
+             <li class="nav-item">
+                <a class="nav-link" th:href="@{/sharingsession/{id}(id=${patient.getId})}">BOOK SHARING SESSION</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">LOG OUT</a>
+            </li>
             </div>
+          </ul>
         </div>
+      </nav>
+   
     <div class="main">
         <div class="inner-box">
         <h2 class="title-form">Booking Counselling Session Form</h2>  

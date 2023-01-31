@@ -85,7 +85,7 @@
         <h2>Please log in your account</h2><br>
         <div th:if="${error}" th:text="${error}" class="error"></div>
        
-            <form action="loginPatientcheck" method="POST">
+            <form action="patientdashboard" method="POST">
             <div>
                 <h3>username ID</h3>
                 <input type="text" name="username">
@@ -94,10 +94,10 @@
             </div>
             <br><br>
             
-            <button class="sub" type="submit" value="Submit">Log in </button>
+            <button class="btn btn-success" type="submit" value="Submit">Log in </button>
         </form>
         <br>
-                <a class="reg" href="/register">Register</a>
+                <a class="btn btn-secondary" href="/register">Register</a>
             
             <br><br>
         </form>

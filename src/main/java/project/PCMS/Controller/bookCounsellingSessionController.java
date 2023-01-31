@@ -59,6 +59,7 @@ public class bookCounsellingSessionController {
         counsellingSession.setDate(date);
         counsellingSession.setReason(reason);
         bookCounsellingSessionRepository.save(counsellingSession);
+        model.addAttribute("success", "success");
         return "index";
     }
 

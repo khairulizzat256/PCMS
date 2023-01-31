@@ -50,7 +50,7 @@ public class LoginController {
     }
 
 
-    @PostMapping("/loginPatientcheck")
+    @PostMapping("/patientdashboard")
     public String loginPatientcheck(@RequestParam String username, @RequestParam String password, Model model){
        
 
