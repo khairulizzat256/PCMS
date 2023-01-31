@@ -1,6 +1,7 @@
 package project.PCMS.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,6 +58,7 @@ public class DoctorController {
         List<CounsellingSession> counsellingSessions = counsellingrepo.findByAssignedDoctorAndStatus(doctor.getfullname(),"assigned");
         model.addAttribute("counsellingSessions", counsellingSessions);
         model.addAttribute("doctor", doctor);
+        
         return "schedule";
         
     }
@@ -68,7 +70,7 @@ public class DoctorController {
     }
 
     @GetMapping("/editProfile")
-    public String editProfile(Model model, @RequestParam ("id")int id){
+        public String editProfile(Model model, @ModelAttribute ("id")int id){
         Doctor doctor = doctorrepository.getDoctorById(id);
         model.addAttribute("doctor",doctor);
         return "editDoctorProfile";
@@ -90,7 +92,7 @@ public class DoctorController {
     }
 
     @PostMapping("/updatedr")
-    public String updatePatient(@ModelAttribute Doctor doctornew, Model model) {
+    public String updateDoctor(@ModelAttribute Doctor doctornew, Model model) {
 
     
     Doctor doctorold = doctorrepository.getDoctorById(doctornew.getId());
@@ -110,4 +112,27 @@ public class DoctorController {
     model.addAttribute("successMessage", "Doctor updated successfully!");
     return "redirect:/admin/admindashboard";
     }
+
+    @PostMapping("/updateProfile/submit")
+        public String submitEditProfile(@ModelAttribute Doctor doctor, @RequestParam("id") int id, Model model){
+        Optional<Doctor> doctorOptional = doctorrepository.findById((long)id);
+        if (doctorOptional.isPresent()) {
+            Doctor doctorToUpdate = doctorOptional.get();
+            doctorToUpdate.setId(id);
+            doctorToUpdate.setusername(doctor.getusername());
+            doctorToUpdate.setfullname(doctor.getfullname());
+            doctorToUpdate.setphoneNo(doctor.getphoneNo());
+            doctorrepository.save(doctorToUpdate);
+
+            List<CounsellingSession> counsellingSessions = counsellingrepo.findAllByAssignedDoctor("");
+
+            model.addAttribute("counsellingSessions", counsellingSessions);
+
+            Doctor doctornew = doctorrepository.getReferenceById((long)id);
+            model.addAttribute("doctor", doctornew);
+            model.addAttribute("update", "update");
+        }
+        return "doctordashboard";
+    }
+    
 }

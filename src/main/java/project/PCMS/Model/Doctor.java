@@ -34,6 +34,14 @@ public class Doctor {
     public Doctor() {
     }
 
+    public Doctor(int id,String username, String fullname, String phoneNo, String password) {
+        this.id = id;
+        this.username = username;
+        this.fullname = fullname;
+        this.phoneNo = phoneNo;
+        this.password = password;
+    }
+
     public Doctor(String username, String fullname, String phoneNo, String password) {
         this.username = username;
         this.fullname = fullname;

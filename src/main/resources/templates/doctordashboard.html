@@ -16,7 +16,7 @@
         <div class="container-fluid">
           <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link active" href="#" th:text="${doctor.getfullname}"></a>
+                <a class="nav-link active " th:href="@{/editProfile(id=${doctor.getId})}" th:text="${doctor.getfullname}"></a>
             </li>
            <li class="nav-item">
             <a class="nav-link" th:href="@{/doctor/viewschedule(doctorId=${doctor.getId})}">View Schedule</a>
@@ -27,14 +27,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Log Out</a>
             </li>
-            
+            </div>
           </ul>
         </div>
       </nav>
 
 
 
-
+      <div th:if="${update}">
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Success!</strong> Update profile!
+          </div>
         
        
             <h1 class="text-center">WELCOME TO PCMS!</h1>
