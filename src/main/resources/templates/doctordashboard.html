@@ -22,7 +22,7 @@
             <a class="nav-link" th:href="@{/doctor/viewschedule(doctorId=${doctor.getId})}">View Schedule</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"href="/report">View Report</a>
+                <a class="nav-link"href="/viewReport">View Report</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/">Log Out</a>
@@ -46,7 +46,7 @@
             <div class="container">
                 <div class="text-center">
                     <div class="inner-box">
-                    <h2 >Assign Counselling Session</h2>  
+                    <h2 >COUNSELLING APPOINTMENT BOOKING</h2>  
                         
                             <table class="table table-condensed" style="width: 100%">
                                 <thead>
@@ -84,7 +84,7 @@
                     <br><br><br>
                     <div class="main">
                         <div class="inner-box">
-                        <h2>Assign Sharing Session</h2>  
+                        <h2>ASSIGN SHARING SESSION</h2>  
                             <form>
                                 <table class="table table-condensed" style="width: 100%">
                                     <thead>
@@ -116,3 +116,10 @@
 
 </body>
 </html>
+
+<script>
+        const date = new Date("1970-01-01T" + time + "Z");
+        const options = {hour: 'numeric', minute: 'numeric', hour12: true};
+        const formattedTime = new Intl.DateTimeFormat('en-US', options).format(date);
+        document.getElementById("time").innerHTML = `${time} = ${formattedTime}`;
+</script>
