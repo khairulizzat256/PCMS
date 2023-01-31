@@ -19,7 +19,7 @@
             <a class="nav-link active" href="#" th:text="${doctor.getfullname}"></a>
         </li>
        <li class="nav-item">
-        <a class="nav-link" th:href="@{/doctor/viewschedule(doctorId=${doctor.getId})}">View Schedule</a>
+        <a class="nav-link bg-secondary text-white" th:href="@{/doctor/viewschedule(doctorId=${doctor.getId})}">View Schedule</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"href="/report">View Report</a>
@@ -31,7 +31,7 @@
       </ul>
     </div>
   </nav>
-  
+
       <div class="container">
 
         <h2>Counselling Appointment Schedule</h2>
@@ -56,33 +56,39 @@
                     <td th:text="${counsellingSession.phoneNo}"></td>
                     <td th:text="${counsellingSession.reason}"></td>
                     <td>
-                    <button type="button" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#myModal">Release</button>
+                    <button type="button" class="btn btn-lg btn-warning" data-bs-toggle="modal" data-bs-target="#myModal">Release</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Make Report</h4>
-            </div>
-            <div class="modal-body">
-                <p>Conclude patient behaviour.</p>
+      <!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Write Report</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p>Conclude patient behaviour.</p>
                 <label for="comment">Report:</label>
                 <textarea class="form-control" rows="5" id="comment" name="report"></textarea>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-          
-        </div>
       </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
