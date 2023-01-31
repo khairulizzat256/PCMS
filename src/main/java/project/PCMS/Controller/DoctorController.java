@@ -60,4 +60,11 @@ public class DoctorController {
     public String report(){
         return "viewReport";
     }
+
+    @GetMapping("/editProfile")
+    public String editProfile(Model model, @RequestParam ("id")int id){
+        Doctor doctor = doctorrepository.getDoctorById(id);
+        model.addAttribute("doctor",doctor);
+        return "editDoctorProfile";
+    }
 }

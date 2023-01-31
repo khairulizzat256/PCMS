@@ -14,7 +14,7 @@
 <body>
 
     <ul class="nav nav-pills bg-info">
-        <li role="presentation" class="nav-link active"><a href="#" th:text="${doctor.getfullname}"></a></li>
+        <li role="presentation" class="nav-link active"><a th:href="@{/editProfile(id=${doctor.id})}" th:text="${doctor.getfullname}"></a></li>
         <li role="presentation"><a th:href="@{/doctor/viewschedule(doctorId=${doctor.getId})}">View Schedule</a></li>
         <li role="presentation"><a href="/report">View Report</a></li>
         <li role="presentation"><a href="/">Log Out</a></li>
