@@ -67,7 +67,7 @@ public class DoctorController {
     }
 
 
-    @PostMapping("/report")
+    @GetMapping("/doctor/report")
     public String report(@ModelAttribute("doctorId") Long doctorid, Model model){
         
         Doctor doctor = doctorrepository.getReferenceById(doctorid);
