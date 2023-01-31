@@ -26,12 +26,14 @@ public class DoctorController {
 
     @Autowired
     private BookCounsellingSessionRepository counsellingrepo;
-
     @Autowired
     private DoctorRepository doctorrepository;
 
     @Autowired
     private PatientRepository patientrepository;
+
+    @Autowired
+    private BookCounsellingSessionRepository bookCounsellingSessionRepository;
 
     @PostMapping("/doctor/acceptsession")
     public String assigncounselling(@RequestParam("counsellingsessionId")Long counsellingsessionId,
@@ -56,6 +58,7 @@ public class DoctorController {
     @GetMapping("/doctor/viewschedule")
     public String viewschedule(@ModelAttribute("doctorId") Long doctorid, Model model) {       
        
+
         Doctor doctor = doctorrepository.getReferenceById(doctorid);
         List<CounsellingSession> counsellingSessions = counsellingrepo.findByAssignedDoctorAndStatus(doctor.getfullname(),"assigned");
         model.addAttribute("counsellingSessions", counsellingSessions);
@@ -66,8 +69,15 @@ public class DoctorController {
     }
 
     
-    @GetMapping("/report")
-    public String report(){
+    @PostMapping("/report")
+    public String report(@ModelAttribute("doctorId") Long doctorid, Model model){
+        
+        Doctor doctor = doctorrepository.getReferenceById(doctorid);
+        List<CounsellingSession> counsellingSessions = bookCounsellingSessionRepository.findAllByAssignedDoctor("");
+        
+        model.addAttribute("counsellingSessions", counsellingSessions);
+        model.addAttribute("doctor", doctor);
+        
         return "viewReport";
     }
 

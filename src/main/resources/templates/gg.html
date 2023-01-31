@@ -1,0 +1,17 @@
+<button id="viewButton">View</button>
+<div id="elementToWorkOn" style="display:none;">
+    Show or hide me
+</div>
+
+<script>
+    const viewButton = document.querySelector('#viewButton');
+    const divContainer = document.querySelector('#elementToWorkOn');
+
+    viewButton.addEventListener('click', function () {
+        if (divContainer.style.display === 'none') {
+            divContainer.style.display = 'block';
+        } else {
+            divContainer.style.display = 'none';
+        }
+    });
+</script>
