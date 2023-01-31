@@ -6,182 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="" th:href="@{css/main.css}"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <title>PCMS-PATIENT</title>
 </head>
 <body>
-    <div class="main">
-        <div class="menu">
-            <div class="profile">
-                <table style="width:100%">
-                    <tr>
-                        <td style="width:5%"><img src="../images/profile.png" class="profilepic"></td>
-                        <td style="width:30%"><span th:text="${patient.getfullname.toUpperCase()}"></span></td>
-                        <td>
-                            <a th:href="@{/bookSessionForm/{id}(id=${patient.getId})}">
-                                <div class="menubox">BOOK SESSION</div>
-                            </a>
-                        </td>
-                        <td style="align-content: center;"><button id="my-btn">TAKE PSYCHOLOGY TEST</button></td>
-                        
-                        <td>
-                            <a th:href="@{/sharingsession/{id}(id=${patient.getId})}"><div class="menubox">BOOK SHARING SESSION</div></a></td>
-                        
-                            <td><a href="/"><div class="menubox">LOGOUT</div></a></td>
-                    </tr>
-                </table>
+
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active " href="#" th:text="${patient.getfullname.toUpperCase}"></a>
+            </li>
+           <li class="nav-item">
+            <a class="nav-link" th:href="@{/bookSessionForm/{id}(id=${patient.getId})}">BOOK APPOINTMENT</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" th:href="@{/sharingsession/{id}(id=${patient.getId})}">BOOK SHARING SESSION</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">LOG OUT</a>
+            </li>
             </div>
+          </ul>
         </div>
+      </nav>
         
-        <h1>WELCOME <span th:text="${patient.getfullname.toUpperCase()}"></span>  TO PCMS!</h1>
+        <h1 class="text-center">WELCOME <span th:text="${patient.getfullname.toUpperCase()}"></span>  TO PCMS!</h1>
+        <div th:if="${success}">
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>SUCCESS!</strong> APPOINTMENT BOOKED!
+              </div>
+            </div>
 
-           
-             <div>
-                <form  id="test">
-                1. I couldn’t seem to experience any positive feeling at all.
-                <br>
-                <input type="radio" name="answer1" value="answer"  required>
-                <label >Almost always</label>
-                <input type="radio" name="answer1" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer1" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer1" value="answer">
-                <label >Never</label><br><br>
-                2. I experienced breathing difficulty.
-                <br>    
-                <input type="radio" name="answer2" value="answer">
-                <label >Almost always</label>
-                <input type="radio" name="answer2" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer2" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer2" value="answer">
-                <label >Never</label><br> <br>       
-                3. I found it difficult to work up the initiative to do things.
-                <br>
-                <input type="radio" name="answer3" value="answer" required>
-                <label >Almost always</label>
-                <input type="radio" name="answer3" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer3" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer3" value="answer">
-                <label >Never</label><br><br>
-                4. I tended to over-react to situations.
-                <br>  
-                <input type="radio" name="answer4" value="answer" required>
-                <label >Almost always</label>
-                <input type="radio" name="answer4" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer4" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer4" value="answer">
-                <label >Never</label><br>  <br>           
-                5. I experienced trembling (eg, in the hands).
-                <br>  
-                <input type="radio" name="answer5" value="answer" required>
-                <label >Almost always</label>
-                <input type="radio" name="answer5" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer5" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer5" value="answer">
-                <label >Never</label><br><br>           
-                6. I felt that I was using a lot of nervous energy.
-                <br>   
-                <input type="radio" name="answer6" value="answer" required>
-                <label >Almost always</label>
-                <input type="radio" name="answer6" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer6" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer6" value="answer">
-                <label >Never</label><br><br>         
-                7. I was worried about situations in which I might panic and make a fool of myself.
-                <br>  
-                <input type="radio" name="answer7" value="answer" required>
-                <label >Almost always</label>
-                <input type="radio" name="answer7" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer7" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer7" value="answer">
-                <label >Never</label><br><br>          
-                8. I felt that I had nothing to look forward to.
-                <br>   
-                <input type="radio" name="answer8" value="answer" required>
-                <label >Almost always</label>
-                <input type="radio" name="answer8" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer8" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer8" value="answer">
-                <label >Never</label><br> <br>       
-                9. I found it difficult to relax.
-                <br>
-                <input type="radio" name="answer9" value="answer" required>
-                <label >Almost always</label>
-                <input type="radio" name="answer9" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer9" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer9" value="answer">
-                <label >Never</label><br><br>           
-                10. I felt I was close to panic.
-                <br>
-                <input type="radio" name="answer10" value="answer" required>
-                <label >Almost always</label>
-                <input type="radio" name="answer10" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer10" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer10" value="answer">
-                <label >Never</label><br><br>
-                11. I felt I wasn’t worth much as a person.
-                <br> 
-                <input type="radio" name="answer11" value="answer" required>
-                <label >Almost always</label>
-                <input type="radio" name="answer11" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer11" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer11" value="answer">
-                <label >Never</label><br> <br>        
-                12. I felt scared without any good reason.
-                <br> 
-                <input type="radio" name="answer12" value="answer" required>
-                <label >Almost always</label>
-                <input type="radio" name="answer12" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer12" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer12" value="answer">
-                <label >Never</label><br> <br>         
-                13. I felt that life was meaningless.
-                <br>
-                <input type="radio" name="answer13" value="answer" required>
-                <label >Almost always</label>
-                <input type="radio" name="answer13" value="answer">
-                <label >Often</label>
-                <input type="radio" name="answer13" value="answer">
-                <label >Sometimes</label>
-                <input type="radio" name="answer13" value="answer">
-                <label >Never</label><br><br><br>
-                
-
-
-                <input class="sub" type="submit" name="submit" value="submit">
-                
-                <input class="reset" type="reset" name="reset" value="reset">
-                
-                </form>
-            </div> 
-    </div>
 </body>
 </html>
 
 <script>
-    const btn = document.querySelector("#my-btn");
+    const btn = document.querySelector("#test-btn");
     const test = document.querySelector("#test");
     const h1 = document.querySelector("h1");
     

@@ -16,6 +16,7 @@ import project.PCMS.Model.Doctor;
     void deleteDoctorById(int id);
     Doctor getDoctorById(int id);
 
+
     
     }
 

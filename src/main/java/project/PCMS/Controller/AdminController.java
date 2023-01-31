@@ -3,25 +3,20 @@ package project.PCMS.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ch.qos.logback.core.net.server.Client;
 import jakarta.transaction.Transactional;
+import project.PCMS.Model.CounsellingSession;
 import project.PCMS.Model.Doctor;
 import project.PCMS.Model.Patient;
+import project.PCMS.Repository.BookCounsellingSessionRepository;
 import project.PCMS.Repository.DoctorRepository;
 import project.PCMS.Repository.PatientRepository;
 
@@ -35,6 +30,19 @@ public class AdminController {
     @Autowired
     DoctorRepository doctorRepository;
 
+    @Autowired
+    BookCounsellingSessionRepository bookCounsellingSessionRepository;
+
+    @GetMapping("/admindashboard")
+    public String dashboard(Model model){
+
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        model.addAttribute("doctors",doctors);
+        return "admindashboard";
+    }
+    
     @GetMapping("/viewclient")
     public String user_manage(Model model){
 
@@ -75,7 +83,13 @@ public class AdminController {
         patient.setphoneNo(phoneNo);
 
         patientRepository.save(patient);
-        return "redirect:/admin/viewclient";
+
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        model.addAttribute("doctors",doctors);
+
+        return "redirect:/admin/admindashboard";
     }
 
     @PostMapping("/createpsychologist")
@@ -92,37 +106,56 @@ public class AdminController {
          doctor.setphoneNo(phoneNo);
  
          doctorRepository.save(doctor);
-         return "redirect:/admin/viewpsychologist";
+
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        model.addAttribute("doctors",doctors);
+        return "redirect:/admin/admindashboard";
      }
      @Transactional
      @GetMapping("/delete/{id}")
-	public String deletePatient(@PathVariable int id) {
+	public String deletePatient(@PathVariable int id, Model model) {
 	    patientRepository.deletePatientById(id);
-		return "redirect:/admin/viewclient";
+
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        model.addAttribute("doctors",doctors);
+		return "redirect:/admin/admindashboard";
 	}
     @Transactional
      @GetMapping("/delete1/{id}")
-	public String deleteDoctor(@PathVariable int id) {
+	public String deleteDoctor(@PathVariable int id,Model model) {
 	    doctorRepository.deleteDoctorById(id);
-        return "redirect:/admin/viewpsychologist";
-	}
 
-    @PutMapping("/update")
-    public ResponseEntity<String> updateClient(@RequestBody Client client) {
-        // Update client information in database
-        return new ResponseEntity<String>("Client updated successfully", HttpStatus.OK);
-    }
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        model.addAttribute("doctors",doctors);
+        return "redirect:/admin/admindashboard";
+	}
 
 
     @GetMapping("/patient/edit/{id}")
     public String editPatient(@PathVariable("id") Long id, Model model) {
     Patient patient = patientRepository.findById(id).get();
     List<Patient> patients = patientRepository.findAll();
-        model.addAttribute("patients", patients);
+     model.addAttribute("patients", patients);
     model.addAttribute("edituser",patient);
+    
 
     return "admindashboard";
 }
+
+    @GetMapping("sessionlist")
+    public String sessionlist(Model model){
+        List<CounsellingSession> sessions = bookCounsellingSessionRepository.findAll();
+        model.addAttribute("sessions", sessions);
+
+        return "adminsessionlist";
+    }
+
 }
 
   
