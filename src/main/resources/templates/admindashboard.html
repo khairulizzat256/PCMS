@@ -17,12 +17,6 @@
            <li class="nav-item">
                 <a class="nav-link"href="/admindashboard">ADMIN</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/viewclient}" >CLIENTS</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/viewpsychologist}" >PSYCHOLOGISTS</a>
-            </li>
             <li class="nav-item float-end">
                 <a class="nav-link" href="/">LOGOUT</a>
             </li>
@@ -37,7 +31,10 @@
             <div class="container">
                 <div th:if="${patients}" class="inner-box">
                 <h2 class="title-form">CLIENT USERS</h2>  
-                    
+                <div class = "row">
+                    <form method="get" action="/admin/form">
+                <button class = "btn btn-secondary"> Add Patient</button>
+                </form>
                         <table class="table" style="width: 100%">
                             <thead>
                                 <tr>
@@ -57,9 +54,12 @@
                                 <td th:text="${patient.getfullname}"></td>
                                 <td th:text="${patient.getphoneNo}"></td> 
                                 <td th:text="${patient.getpassword}">                        
-                                <td><a class = "btn btn-warning" th:href="@{admin/patient/edit/{id}(id=${patient.getId})}">Edit</a>
-                                <button class="btn btn-danger" th:attr="data-id=${patient.id}">Delete</button></td>
-                                <td></td>
+                                <td><a class = "btn btn-warning" th:href="@{/patient/edit/{id}(id=${patient.getId})}">Edit</a>
+                                    <form method="GET" th:action="@{/admin/delete/} + ${patient.id}">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class = "btn btn-danger">delete</button>
+                                        </form>
+                                </td>
                             
                             </tr>
                         </tbody>
@@ -72,6 +72,9 @@
 
                             <div th:if="${doctors}" class="inner-box">
                         <h2 class="title-form">PSYCHOLOGIST USERS</h2>  
+                        <form method="get" action="/admin/form1">
+                            <button class = "btn btn-secondary"> Add Psychologist</button>
+                          </form>
                             
                                 <table class="table" th:if="${doctors}">
                                     <thead>
@@ -91,8 +94,10 @@
                                     <td th:text="${doctor.getfullname}"></td>
                                     <td th:text="${doctor.getphoneNo}"></td> 
                                     <td th:text="${doctor.getpassword}"></td>                         
-                                    <td><button class="btn btn-warning" th:attr="data-id=${doctor.id}" th:onclick="'showModal()'">Edit</button>
-                                        <button class="btn btn-danger" th:attr="data-id=${doctor.id}">Delete</button></td>
+                                    <td><a class = "btn btn-warning" th:href="@{/doctor/edit/{id}(id=${doctor.getId})}">Edit</a></button>
+                                        <form method="get" th:action="@{/admin/delete1/} + ${doctor.id}">
+                                            <button class = "btn btn-danger">delete</button>
+                                          </form></td>
                                     </tr>
                                 </tbody>
                                 </table>
@@ -104,16 +109,18 @@
                 
                             <!-- POP UP TO EDIT USER -->
                             <div th:if="${edituser}">
+                                <div class="modal" id="myModal">
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title">Enter a string</h5>
+                                      <h5 class="modal-title">Edit User</h5>
                                       <button type="button" class="close" th:onclick="'hideModal()'" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
                                     <div class="modal-body">
                                         <form th:action="@{/update}" th:method="post" th:object="${edituser}">
+                                            <input type="hidden" th:field="*{id}" th:value="${edituser.getId}"/><br>
                                             <label>Username:</label>
                                             <input type="text" th:field="*{username}" th:value="${edituser.getusername}"/><br>
                                             <label>Fullname:</label>
@@ -126,36 +133,46 @@
                                     </div>
                                     <div class="modal-footer">
                                       <button type="submit" class="btn btn-primary">Submit</button>
-                                      <button type="button" class="btn btn-secondary" th:onclick="'hideModal()'">Close</button>
+                                      <a type="button" class="btn btn-secondary" th:href="@{/admin/admindashboard}" >Close</a>
                                     </form>
                                     </div>
                                   </div>
                                 </div>
                               </div>
+                            </div>
 
-                              <!-- The Modal -->
-                            <div class="modal" id="myModal">
+                             <!-- POP UP TO EDIT USER -->
+                             <div th:if="${edituserdr}">
+                                <div class="modal" id="myModal">
                                 <div class="modal-dialog">
-                                <div class="modal-content">
-                            
-                                    <!-- Modal Header -->
+                                  <div class="modal-content">
                                     <div class="modal-header">
-                                    <h4 class="modal-title">Modal Heading</h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                      <h5 class="modal-title">Edit User</h5>
+                                      <button type="button" class="close" th:onclick="'hideModal()'" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
                                     </div>
-                            
-                                    <!-- Modal body -->
                                     <div class="modal-body">
-                                    Modal body..
+                                        <form th:action="@{/updatedr}" th:method="post" th:object="${edituserdr}">
+                                            <input type="hidden" th:field="*{id}" th:value="${edituserdr.getId}"/><br>
+                                            <label>Username:</label>
+                                            <input type="text" th:field="*{username}" th:value="${edituserdr.getusername}"/><br>
+                                            <label>Fullname:</label>
+                                            <input type="text" th:field="*{fullname}" th:value="${edituserdr.getfullname}"/><br>
+                                            <label>Phone Number:</label>
+                                            <input type="text" th:field="*{phoneNo}" th:value="${edituserdr.getphoneNo}"/><br>
+                                            <label>Password:</label>
+                                            <input type="text" th:field="*{password}" th:value="${edituserdr.getpassword}"/><br>
+                                          
                                     </div>
-                            
-                                    <!-- Modal footer -->
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                      <a type="button" class="btn btn-secondary" th:href="@{/admin/admindashboard}" >Close</a>
+                                    </form>
                                     </div>
-                            
+                                  </div>
                                 </div>
-                                </div>
+                              </div>
                             </div>
                 </div>
             </div>
@@ -163,6 +180,7 @@
 </body>
 </html>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
 $(".btn btn-warning").click(function() {
@@ -176,6 +194,10 @@ $(".btn btn-warning").click(function() {
             }
         });
     });
+
+    $(document).ready(function () {
+    $('#myModal').modal('show');
+});
 
 
 </script>

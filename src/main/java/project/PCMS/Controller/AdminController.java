@@ -35,6 +35,16 @@ public class AdminController {
     @Autowired
     DoctorRepository doctorRepository;
 
+    @GetMapping("/admindashboard")
+    public String dashboard(Model model){
+
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        model.addAttribute("doctors",doctors);
+        return "admindashboard";
+    }
+    
     @GetMapping("/viewclient")
     public String user_manage(Model model){
 
@@ -75,7 +85,13 @@ public class AdminController {
         patient.setphoneNo(phoneNo);
 
         patientRepository.save(patient);
-        return "redirect:/admin/viewclient";
+
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        model.addAttribute("doctors",doctors);
+
+        return "redirect:/admin/admindashboard";
     }
 
     @PostMapping("/createpsychologist")
@@ -92,34 +108,44 @@ public class AdminController {
          doctor.setphoneNo(phoneNo);
  
          doctorRepository.save(doctor);
-         return "redirect:/admin/viewpsychologist";
+
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        model.addAttribute("doctors",doctors);
+        return "redirect:/admin/admindashboard";
      }
      @Transactional
      @GetMapping("/delete/{id}")
-	public String deletePatient(@PathVariable int id) {
+	public String deletePatient(@PathVariable int id, Model model) {
 	    patientRepository.deletePatientById(id);
-		return "redirect:/admin/viewclient";
+
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        model.addAttribute("doctors",doctors);
+		return "redirect:/admin/admindashboard";
 	}
     @Transactional
      @GetMapping("/delete1/{id}")
-	public String deleteDoctor(@PathVariable int id) {
+	public String deleteDoctor(@PathVariable int id,Model model) {
 	    doctorRepository.deleteDoctorById(id);
-        return "redirect:/admin/viewpsychologist";
-	}
 
-    @PutMapping("/update")
-    public ResponseEntity<String> updateClient(@RequestBody Client client) {
-        // Update client information in database
-        return new ResponseEntity<String>("Client updated successfully", HttpStatus.OK);
-    }
+        List<Patient> patients = patientRepository.findAll();
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("patients", patients);
+        model.addAttribute("doctors",doctors);
+        return "redirect:/admin/admindashboard";
+	}
 
 
     @GetMapping("/patient/edit/{id}")
     public String editPatient(@PathVariable("id") Long id, Model model) {
     Patient patient = patientRepository.findById(id).get();
     List<Patient> patients = patientRepository.findAll();
-        model.addAttribute("patients", patients);
+     model.addAttribute("patients", patients);
     model.addAttribute("edituser",patient);
+    
 
     return "admindashboard";
 }
