@@ -14,8 +14,8 @@
 <body>
 
     <ul class="nav nav-pills bg-info">
-        <li role="presentation" class="active"><a href="#" th:text="${doctor.getfullname}"></a></li>
-        <li role="presentation"><a href="doctorschedule.html">View Schedule</a></li>
+        <li role="presentation" class="nav-link active"><a href="#" th:text="${doctor.getfullname}"></a></li>
+        <li role="presentation"><a th:href="@{/doctor/viewschedule(doctorId=${doctor.getId})}">View Schedule</a></li>
         <li role="presentation"><a href="/report">View Report</a></li>
         <li role="presentation"><a href="/">Log Out</a></li>
       </ul>
@@ -53,9 +53,9 @@
                                         <td th:text="${counsellingSession.reason}"></td>
                                         <td>
                                             
-                                            <form action="#" th:action="@{/doctor/acceptsession}" th:object="${counsellingSession}" method="post">
+                                            <form action="#" th:action="@{/doctor/acceptsession}"  method="post">
                                                 <input type="hidden" name="counsellingsessionId" th:value="${counsellingSession.id}">
-                                                <input type="hidden" name="doctor" th:value="${doctor}">
+                                                <input type="hidden" name="doctor" th:value="${doctor.getId}">
                                             <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to submit?')">Accept</button>
                                             </form>
                                         </td>

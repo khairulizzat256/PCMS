@@ -36,7 +36,7 @@ public class CounsellingSession {
     @Column(name = "status")
     private String status = "unassigned";
 
-    @Column(name = "assignedDoctor", nullable = false, columnDefinition = "varchar(255) default ''")
+    @Column(name = "assignedDoctor", columnDefinition = "varchar(255) default ''")
     private String assignedDoctor = "";
 
 

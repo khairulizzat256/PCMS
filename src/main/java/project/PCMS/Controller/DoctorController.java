@@ -20,23 +20,19 @@ public class DoctorController {
 
     @Autowired
     private BookCounsellingSessionRepository counsellingrepo;
-
     @Autowired
-    BookCounsellingSessionRepository bookCounsellingSessionRepository;
-
-    @Autowired
-    DoctorRepository doctorRepository;
-
-    
+    private DoctorRepository doctorrepository;
 
     @PostMapping("/doctor/acceptsession")
     public String assigncounselling(@RequestParam("counsellingsessionId")Long counsellingsessionId,
-                                    @ModelAttribute("counsellingsession") Doctor doctor, Model model){
+                                    @ModelAttribute("doctor") Long doctorid, Model model){
 
         
         CounsellingSession CS = counsellingrepo.getReferenceById(counsellingsessionId);
-        String drname = doctor.getfullname();
-        CS.setAssignedDoctor(drname);
+        Doctor doctor = doctorrepository.getReferenceById(doctorid);
+       
+        CS.setAssignedDoctor(doctor.getfullname());
+        CS.setStatus("assigned");
         counsellingrepo.save(CS);
        
         List<CounsellingSession> counsellingSessions = counsellingrepo.findAllByAssignedDoctor("");
@@ -46,13 +42,23 @@ public class DoctorController {
 
         return "doctordashboard";
     }
-    @GetMapping("/report")
-    public String report(Model model){
-       
-        List<CounsellingSession> counsellingSessions = bookCounsellingSessionRepository.findAllByAssignedDoctor("");
-        model.addAttribute("counsellingSessions", counsellingSessions);
+
+    @GetMapping("/doctor/viewschedule")
+    public String viewschedule(@ModelAttribute("doctorId") Long doctorid, Model model) {       
        
 
+        Doctor doctor = doctorrepository.getReferenceById(doctorid);
+        List<CounsellingSession> counsellingSessions = counsellingrepo.findByAssignedDoctorAndStatus(doctor.getfullname(),"assigned");
+        model.addAttribute("counsellingSessions", counsellingSessions);
+        model.addAttribute("doctor", doctor);
+        return "schedule";
+        
+    }
+
+
+    @GetMapping("/report")
+    public String report(){
+        
         return "viewReport";
     }
 }
