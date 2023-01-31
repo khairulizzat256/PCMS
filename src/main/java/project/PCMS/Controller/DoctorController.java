@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import project.PCMS.Model.CounsellingSession;
 import project.PCMS.Model.Doctor;
 import project.PCMS.Model.Patient;
+import project.PCMS.Model.SharingSession;
 import project.PCMS.Repository.BookCounsellingSessionRepository;
 import project.PCMS.Repository.DoctorRepository;
 import project.PCMS.Repository.PatientRepository;
+import project.PCMS.Repository.SharingSessionRepository;
 
 @Controller
 public class DoctorController {
@@ -63,7 +65,7 @@ public class DoctorController {
         
     }
 
-
+    
     @GetMapping("/report")
     public String report(){
         return "viewReport";
