@@ -1,6 +1,7 @@
 package project.PCMS.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -86,5 +87,33 @@ public class PatientController {
     
 
     return "admindashboard";
+    }
+
+
+    @GetMapping("/updateProfile")
+        public String editProfile(Model model, @ModelAttribute ("id")int id){
+        Patient patient = patientRepository.getPatientById(id);
+        model.addAttribute("patient", patient);
+        return "editPatientProfile";
+    }
+
+    @PostMapping("/updatePatient/confirm")
+        public String submitEditProfile(@ModelAttribute Patient patient, @RequestParam("id") int id, Model model){
+        Optional<Patient> patientOptional = patientRepository.findById((long)id);
+        if (patientOptional.isPresent()) {
+            Patient patientToUpdate = patientOptional.get();
+            patientToUpdate.setId(id);
+            patientToUpdate.setusername(patient.getusername());
+            patientToUpdate.setfullname(patient.getfullname());
+            patientToUpdate.setphoneNo(patient.getphoneNo());
+            patientRepository.save(patientToUpdate);
+
+
+
+            Patient patientnew = patientRepository.getReferenceById((long)id);
+            model.addAttribute("patient", patientnew);
+            model.addAttribute("update", "update");
+        }
+        return "index";
     }
 }
