@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import project.PCMS.Model.CounsellingSession;
 import project.PCMS.Model.Doctor;
 import project.PCMS.Model.Patient;
+import project.PCMS.Model.Report;
 import project.PCMS.Model.SharingSession;
 import project.PCMS.Repository.BookCounsellingSessionRepository;
 import project.PCMS.Repository.DoctorRepository;
 import project.PCMS.Repository.PatientRepository;
+import project.PCMS.Repository.ReportRepository;
 import project.PCMS.Repository.SharingSessionRepository;
 
 @Controller
@@ -34,6 +36,21 @@ public class DoctorController {
 
     @Autowired
     private BookCounsellingSessionRepository bookCounsellingSessionRepository;
+
+    @Autowired
+    private ReportRepository reportrepository;
+
+
+    @GetMapping("/doctor/doctordashboard")
+    public String doctordashboard(@RequestParam("doctorId") int doctorid, Model model){
+        List<CounsellingSession> counsellingSessions = counsellingrepo.findAllByAssignedDoctor("");
+
+        model.addAttribute("counsellingSessions", counsellingSessions);
+
+        Doctor doctor = doctorrepository.getReferenceById((long)doctorid);
+        model.addAttribute("doctor", doctor);
+        return "doctordashboard";
+    }
 
     @PostMapping("/doctor/acceptsession")
     public String assigncounselling(@RequestParam("counsellingsessionId")Long counsellingsessionId,
@@ -69,13 +86,51 @@ public class DoctorController {
     }
 
 
+    @GetMapping("doctor/makereport")
+    public String makereport(@RequestParam("doctorid") Long doctorid, @RequestParam("sessionid") Long sessionid, Model model){
+        
+        Doctor doctor = doctorrepository.getReferenceById(doctorid);
+        model.addAttribute("doctor", doctor);
+
+        CounsellingSession counsel = counsellingrepo.getReferenceById(sessionid);
+        model.addAttribute("counsel", counsel);
+
+        
+        return "makereport";
+    }
+
+    @PostMapping("doctor/savereport")
+    public String savereport(@RequestParam("doctorId") Long doctorid, 
+                            @RequestParam("sessionId") Long sessionid,
+                            @RequestParam("stringreport") String Stringreport, Model model){
+        
+        Doctor doctor = doctorrepository.getReferenceById(doctorid);
+        CounsellingSession counsel = counsellingrepo.getReferenceById(sessionid);
+        counsel.setStatus("Released");
+        counsellingrepo.save(counsel);
+
+        Report report = new Report();
+        report.setFullname(counsel.getFullname());
+        report.setPhoneNo(counsel.getPhoneNo());
+        report.setTime(counsel.getTime());
+        report.setDate(counsel.getDate());
+        report.setReason(counsel.getReason());
+        report.setStatus(counsel.getStatus());
+        report.setAssignedDoctor(counsel.getAssignedDoctor());
+        report.setReport(Stringreport);
+
+        reportrepository.save(report);
+        
+        return "redirect:/doctor/report?doctorId=" + doctorid;
+    }
+
     @GetMapping("doctor/report")
     public String report(@ModelAttribute("doctorId") Long doctorid, Model model){
         
         Doctor doctor = doctorrepository.getReferenceById(doctorid);
-        List<CounsellingSession> counsellingSessions = bookCounsellingSessionRepository.findAllByAssignedDoctor("");
+        List<Report> report = reportrepository.findByAssignedDoctorAndStatus(doctor.getfullname(), "released");
         
-        model.addAttribute("counsellingSessions", counsellingSessions);
+        model.addAttribute("report", report);
         model.addAttribute("doctor", doctor);
         
         return "viewReport";

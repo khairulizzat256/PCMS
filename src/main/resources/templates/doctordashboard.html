@@ -18,6 +18,9 @@
             <li class="nav-item">
                 <a class="nav-link active " th:href="@{/editProfile(id=${doctor.getId})}" th:text="${doctor.getfullname}"></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+                </li>
            <li class="nav-item">
             <a class="nav-link" th:href="@{/doctor/viewschedule(doctorId=${doctor.getId})}">View Schedule</a>
             </li>

@@ -40,7 +40,17 @@ public class CounsellingSession {
     private String assignedDoctor = "";
 
 
-
+    public CounsellingSession(int id, String fullname, String phoneNo, Time time, Date date, String reason, String status,
+    String assignedDoctor) {
+        this.id = id;
+        this.fullname = fullname;
+        this.phoneNo = phoneNo;
+        this.time = time;
+        this.date = date;
+        this.reason = reason;
+        this.status = status;
+        this.assignedDoctor = assignedDoctor;
+}
     
 
     public CounsellingSession(String fullname, String phoneNo, Time time, Date date, String reason, String status,
@@ -127,6 +137,14 @@ public class CounsellingSession {
 
     public void setAssignedDoctor(String assignedDoctor) {
         this.assignedDoctor = assignedDoctor;
+    }
+
+
+    @Override
+    public String toString() {
+        return "CounsellingSession [id=" + id + ", fullname=" + fullname + ", phoneNo=" + phoneNo + ", time=" + time
+                + ", date=" + date + ", reason=" + reason + ", status=" + status + ", assignedDoctor=" + assignedDoctor
+                + "]";
     }
 
     

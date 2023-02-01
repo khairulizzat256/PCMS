@@ -78,6 +78,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="#" th:text="${doctor.getfullname}"></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/doctor/doctordashboard(doctorId=${doctor.getId})}">Home</a>
+                    </li>
                <li class="nav-item">
                 <a class="nav-link" th:href="@{/doctor/viewschedule(doctorId=${doctor.getId})}">View Schedule</a>
                 </li>
@@ -94,39 +97,36 @@
           
         <h1><u>Report Management</u></h1>
         <div class="box3">
-            <form>
+        
                 <table style="width: 100%" border="1">
                     <thead>
                         <tr>
+                            <td>No.</td>
                             <td>Date</td>
+                            <td>Time</td>
                             <td>Client Fullname</td>
-                            <td>Reason</td> 
-                            <td>Action</td>
+                            <td>PhoneNo</td>
+                            <td>Reason Appointment</td>
+                            <td>Status</td> 
+                            <td>Report</td> 
+                            
                         </tr>
                     </thead>
                     <tbody>
                         
-                        <tr th:each="counsellingSession: ${counsellingSessions}">
-                            <td th:text="${counsellingSession.date}"></td>
-                            <td th:text="${counsellingSession.fullname}"></td>
-                            <td th:text="${counsellingSession.reason}"></td>
-                            
-                            <td>
-
-                                <button id="viewButton">Delete</button>
-                                <div id="elementToWorkOn" style="display:none;">
-                                    Show or hide me
-                                </div>
-
-                                
-                            
-                            </td>
+                        <tr th:each="report: ${report}">
+                            <td th:text="${report.id}"></td>
+                            <td th:text="${report.date}"></td>
+                            <td th:text="${report.time}"></td>
+                            <td th:text="${report.fullname}"></td>
+                            <td th:text="${report.phoneNo}"></td>
+                            <td th:text="${report.reason}"></td>
+                            <td th:text="${report.status}"></td>
+                            <td th:text="${report.report}"></td>
 
                         </tr>
                     </tbody>
                 </table>
-               
-            </form>
 
     </body>
 </html>
